@@ -1036,5 +1036,14 @@ public class InitMain implements IConst {
 	private void outNonLocal() {
 		System.out.println("Error: non-local addr encountered.");
 	}
+	
+	public int factorial(int n) {
+		int i;
+		int res = 1;
+		for (i = 2; i <= n; i++) {
+			res *= i;
+		}
+		return res;
+	}
 
 }
