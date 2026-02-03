@@ -6,6 +6,7 @@ import iconst.KeywordTyp;
 import iconst.BifTyp;
 import iconst.NodeCellTyp;
 import iconst.SysFnTyp;
+import config.Config;
 import page.Node;
 import page.AddrNode;
 import page.Store;
@@ -53,6 +54,7 @@ public class ScanSrc implements IConst {
 		"Punctuation",
 		"Invalid Symbols"
 	};
+	private Config cfg;
 	public int rootNodep;
 	private boolean endFound;
 	private boolean textFound;
@@ -74,8 +76,9 @@ public class ScanSrc implements IConst {
 	private int dirtyCol;
 	private int fatalRtnCode = 0;
 	
-	public ScanSrc(Store store, String fileName) {
+	public ScanSrc(Store store, String fileName, Config cfg) {
 		this.store = store;
+		this.cfg = cfg;
 		lineCount = 0;
 		endFound = false;
 		srcFileName = fileName;
@@ -507,7 +510,7 @@ public class ScanSrc implements IConst {
 	}
 	
 	public void omsg(String msg) {  
-		if (idebug == 1) {
+		if (cfg.isDebug()) {
 			omsgbuf += msg;
 			System.out.println(omsgbuf);
 			omsgbuf = "";
@@ -515,7 +518,7 @@ public class ScanSrc implements IConst {
 	}
 	
 	public void omsgz(String msg) {  
-		if (idebug == 1) {
+		if (cfg.isDebug()) {
 			omsgbuf += msg;
 		}
 	}

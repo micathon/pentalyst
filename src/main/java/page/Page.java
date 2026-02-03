@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import iconst.IConst;
 import iconst.PageTyp;
+import config.Config;
 
 public class Page implements IConst {
 
@@ -22,11 +23,13 @@ public class Page implements IConst {
 	private HashMap<?, ?> maps[];
 	private boolean gcbits[];  // will be used for garbage collection (future)
 	//
+	private Config cfg;
 	private int nextIdx;  // index to PageTab
 	private int prevIdx;  // index to PageTab
 	
-	public Page(PageTyp pgtyp) {
+	public Page(PageTyp pgtyp, Config cfg) {
 		this.pgtyp = pgtyp;
+		this.cfg = cfg;
 		valcount = 0;
 		freeidx = -1;
 		nextIdx = -1;
@@ -76,7 +79,7 @@ public class Page implements IConst {
 	}
 	
 	public void omsg(String msg) {
-		if (idebug == 1) {
+		if (cfg.isDebug()) {
 			System.out.println(msg);
 		}
 	}

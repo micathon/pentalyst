@@ -4,6 +4,7 @@ import iconst.IConst;
 import iconst.KeywordTyp;
 import iconst.PageTyp;
 import iconst.RunConst;
+import config.Config;
 import page.AddrNode;
 import page.Node;
 import page.Page;
@@ -13,11 +14,13 @@ class RunPushPop implements IConst, RunConst {
 	
 	private Store store;
 	private RunTime rt;
+	private Config cfg;
 	private int locBaseIdx;
 	
-	public RunPushPop(Store store, RunTime rt) {
+	public RunPushPop(Store store, RunTime rt, Config cfg) {
 		this.store = store;
 		this.rt = rt;
+		this.cfg = cfg;
 		locBaseIdx = rt.getLocBaseIdx();
 	}
 	

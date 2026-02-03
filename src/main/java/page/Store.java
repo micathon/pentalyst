@@ -5,6 +5,7 @@ import java.util.HashMap;
 import iconst.IConst;
 import iconst.NodeCellTyp;
 import iconst.PageTyp;
+import config.Config;
 
 // bookTab has 1024 ptrs. each to different pageTab
 // pageTab has 1024 ptrs. each to different page
@@ -29,6 +30,7 @@ public class Store implements IConst {
 	private int bookLen;
 	private int firstFree;
 	private int currBookIdx;
+	private Config cfg;
 	// int bookLen;
 	// int firstFree;
 	// afInt.firstBookIdx .. afString.firstBookIdx
@@ -45,23 +47,25 @@ public class Store implements IConst {
 	// int valcount;
 	// int freeidx;  
 	
-	public Store() {
+	public Store(Config cfg) {
 		PageTab pgtab;
-		stackTab = new PageTab();
+		
+		this.cfg = cfg;
+		stackTab = new PageTab(cfg);
 		bookTab = new PageTab[INTPGLEN];
 		for (int i=0; i < INTPGLEN; i++) {
 			bookTab[i] = null;
 		}
-		pgtab = new PageTab(PageTyp.INTVAL);
+		pgtab = new PageTab(PageTyp.INTVAL, cfg);
 		bookTab[0] = pgtab;
-		afInt = new AllocFree(PageTyp.INTVAL, this);
-		afFloat = new AllocFree(PageTyp.FLOAT, this);
-		afString = new AllocFree(PageTyp.STRING, this);
-		afLong = new AllocFree(PageTyp.LONG, this);
-		afByte = new AllocFree(PageTyp.BYTE, this);
-		afNode = new AllocFree(PageTyp.NODE, this);
-		afList = new AllocFree(PageTyp.LIST, this);
-		afMap = new AllocFree(PageTyp.MAP, this);
+		afInt = new AllocFree(PageTyp.INTVAL, this, cfg);
+		afFloat = new AllocFree(PageTyp.FLOAT, this, cfg);
+		afString = new AllocFree(PageTyp.STRING, this, cfg);
+		afLong = new AllocFree(PageTyp.LONG, this, cfg);
+		afByte = new AllocFree(PageTyp.BYTE, this, cfg);
+		afNode = new AllocFree(PageTyp.NODE, this, cfg);
+		afList = new AllocFree(PageTyp.LIST, this, cfg);
+		afMap = new AllocFree(PageTyp.MAP, this, cfg);
 		afInt.setFirst(0);
 		firstFree = -1;
 		bookLen = 1;
@@ -463,6 +467,7 @@ class PageTab implements IConst {
 	private int maxStkIdx;
 	private PageTyp pgtyp;
 	private boolean isFree;
+	private Config cfg;
 	private int nextIdx;  // index to bookTab
 	private int firstFreeIdx;
 	private int firstPageIdx;
@@ -470,13 +475,15 @@ class PageTab implements IConst {
 	private int currPageIdx;
 	private int pageTabLen;
 	
-	public PageTab(PageTyp pgtyp) {
+	public PageTab(PageTyp pgtyp, Config cfg) {
 		Page page;
+		
+		this.cfg = cfg;
 		pageTab = new Page[INTPGLEN];
 		for (int i=0; i < INTPGLEN; i++) {
 			pageTab[i] = null;
 		}
-		page = new Page(pgtyp);
+		page = new Page(pgtyp, cfg);
 		pageTab[0] = page;
 		this.pgtyp = pgtyp;
 		pageTabLen = 1;
@@ -484,23 +491,24 @@ class PageTab implements IConst {
 		isFree = true;
 	}
 	
-	public PageTab() {
+	public PageTab(Config cfg) {
 		Page page;
 		ArrayList<AddrNode> list = initStkLst(NODESTKLEN);
 		ArrayList<Integer> nodeplist = initNodepLst(NODESTKLEN);
 
+		this.cfg = cfg;
 		pageTab = new Page[OPSTKLEN];
 		for (int i=0; i < OPSTKLEN; i++) {
 			pageTab[i] = null;
 		}
 		opStkPgIdx = 0;
 		opStkIdx = 0;
-		page = new Page(PageTyp.BYTE);
+		page = new Page(PageTyp.BYTE, cfg);
 		pageTab[opStkPgIdx] = page;
 
 		nodeStkLstIdx = 0;
 		nodeStkIdx = 0;
-		nodepg = new Page(PageTyp.LIST);
+		nodepg = new Page(PageTyp.LIST, cfg);
 		nodepg.setList(0, list);
 		for (int i=1; i < INTPGLEN; i++) {
 			nodepg.setList(i, null);
@@ -509,7 +517,7 @@ class PageTab implements IConst {
 		maxStkIdx = 0;
 		nodeMastIdx = 0;
 		nodeLstIdx = 0;
-		nodelstpg = new Page(PageTyp.LIST);
+		nodelstpg = new Page(PageTyp.LIST, cfg);
 		nodelstpg.setList(0, nodeplist);
 		for (int i=1; i < INTPGLEN; i++) {
 			nodelstpg.setList(i, null);
@@ -1079,7 +1087,7 @@ class PageTab implements IConst {
 		else if (opStkPgIdx < OPSTKLEN - 1) {
 			page = pageTab[++opStkPgIdx];
 			if (page == null) {
-				page = new Page(PageTyp.BYTE);
+				page = new Page(PageTyp.BYTE, cfg);
 				pageTab[opStkPgIdx] = page;
 			}
 			opStkIdx = 0;
@@ -1136,7 +1144,7 @@ class PageTab implements IConst {
 	}
 	
 	public void omsg(String msg) {
-		if (irtbug == 1) {
+		if (cfg.isDebug()) {
 			System.out.println(msg);
 		}
 	}
@@ -1167,9 +1175,11 @@ class AllocFree implements IConst {
 	private int currPageIdx;
 	private PageTab currPgTab;
 	private int currBookIdx;
+	private Config cfg;
 	private boolean zdebug;  //##
 	
-	public AllocFree(PageTyp pgtyp, Store store) {
+	public AllocFree(PageTyp pgtyp, Store store, Config cfg) {
+		this.cfg = cfg;
 		pageTyp = pgtyp;
 		datarec = new DataRec();
 		this.store = store;
@@ -1249,7 +1259,7 @@ class AllocFree implements IConst {
 				store.setBookLen(bookLen);
 				pgtab = store.getPageTab(currBookIdx);
 				if (pgtab == null) {
-					pgtab = new PageTab(pageTyp);
+					pgtab = new PageTab(pageTyp, cfg);
 					store.setPageTab(currBookIdx, pgtab);
 				}
 			}
@@ -1335,7 +1345,7 @@ class AllocFree implements IConst {
 			pgtab.setCount(len);
 			page = pgtab.getPage(currPageIdx);
 			if (page == null) {
-				page = new Page(pageTyp);
+				page = new Page(pageTyp, cfg);
 				pgtab.setPage(currPageIdx, page);
 			}
 			// append curr pg to page list:

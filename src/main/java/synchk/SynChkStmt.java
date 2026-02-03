@@ -2,6 +2,7 @@ package synchk;
 
 import iconst.KeywordTyp;
 import iconst.NodeCellTyp;
+import config.Config;
 import page.Page;
 import page.Node;
 import page.Store;
@@ -13,11 +14,13 @@ public class SynChkStmt {
 	private Store store;
 	private SynChk synChk;
 	private SynChkExpr synExpr;
+	private Config cfg;
 	
-	public SynChkStmt(SynChk synChk, ScanSrc scan, Store store) {
+	public SynChkStmt(SynChk synChk, ScanSrc scan, Store store, Config cfg) {
 		this.synChk = synChk;
 		this.scan = scan;
 		this.store = store;
+		this.cfg = cfg;
 	}
 	
 	public void init() {

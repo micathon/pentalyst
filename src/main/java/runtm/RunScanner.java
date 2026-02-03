@@ -4,6 +4,7 @@ import iconst.IConst;
 import iconst.RunConst;
 import iconst.KeywordTyp;
 import iconst.NodeCellTyp;
+import config.Config;
 import page.Node;
 import page.AddrNode;
 import page.Store;
@@ -23,6 +24,7 @@ public class RunScanner implements IConst, RunConst {
 	private int rootNodep;
 	private RunTime rt;
 	private String scopeFuncName;
+	private Config cfg;
 	private int defunCount;
 	private int count;
 	private int glbVarListIdx;
@@ -36,12 +38,15 @@ public class RunScanner implements IConst, RunConst {
 	private boolean isRunTest;
 	private boolean isBadUtPair;
 
-	public RunScanner(Store store, ScanSrc scanSrc, SynChk synChk, int rootNodep) {
+	public RunScanner(Store store, ScanSrc scanSrc, SynChk synChk, 
+		int rootNodep, Config cfg
+	) {
 		this.store = store;
 		this.scanSrc = scanSrc;
 		this.synChk = synChk;
 		this.rootNodep = rootNodep;
-		rt = new RunTime(store, scanSrc, synChk);
+		this.cfg = cfg;
+		rt = new RunTime(store, scanSrc, synChk, cfg);
 		gvarList = new ArrayList<Integer>();
 		lastRightp = 0;
 		lastErrCode = 0;
@@ -67,13 +72,14 @@ public class RunScanner implements IConst, RunConst {
 	}
 	
 	public void out(String msg) {
-		if (idebug == 1) {
+		if (cfg.isDebug()) {
 			System.out.println(msg);
 		}
 	}
 	
 	public void omsg(String msg) {  
-		if (irtbug == 1) {
+		//if (irtbug == 1) {
+		if (cfg.isDebug()) {
 			omsgbuf += msg;
 			System.out.println(omsgbuf);
 			omsgbuf = "";
@@ -81,7 +87,8 @@ public class RunScanner implements IConst, RunConst {
 	}
 	
 	public void omsgz(String msg) {  
-		if (irtbug == 1) {
+		//if (irtbug == 1) {
+		if (cfg.isDebug()) {
 			omsgbuf += msg;
 		}
 	}

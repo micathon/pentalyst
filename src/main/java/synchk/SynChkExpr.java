@@ -3,6 +3,7 @@ package synchk;
 import iconst.KeywordTyp;
 import iconst.NodeCellTyp;
 import iconst.BifTyp;
+import config.Config;
 import page.Node;
 import page.Store;
 import scansrc.ScanSrc;
@@ -12,13 +13,15 @@ public class SynChkExpr {
 	private ScanSrc scan;
 	private Store store;
 	private SynChk synChk;
+	private Config cfg;
 	@SuppressWarnings("unused")
 	private SynChkStmt synStmt;
 	
-	public SynChkExpr(SynChk synChk, ScanSrc scan, Store store) {
+	public SynChkExpr(SynChk synChk, ScanSrc scan, Store store, Config cfg) {
 		this.synChk = synChk;
 		this.scan = scan;
 		this.store = store;
+		this.cfg = cfg;
 	}
 	
 	public void init() {

@@ -2,6 +2,7 @@ package synchk;
 
 import iconst.KeywordTyp;
 import iconst.NodeCellTyp;
+import config.Config;
 import page.Node;
 import page.Page;
 import page.Store;
@@ -13,6 +14,7 @@ public class SynChk {
 	public SynChkExpr synExpr;
 	private ScanSrc scan;
 	private Store store;
+	private Config cfg;
 	public boolean isUnitTest; 
 	public boolean isUnitTestFail; 
 	public boolean isBrkZeroFail;  
@@ -22,11 +24,12 @@ public class SynChk {
 	public int moduleval;
 	private static final int ABPHASE = 100;
 
-	public SynChk(ScanSrc scan, Store store) {
+	public SynChk(ScanSrc scan, Store store, Config cfg) {
 		this.scan = scan;
 		this.store = store;
-		this.synStmt = new SynChkStmt(this, scan, store);
-		this.synExpr = new SynChkExpr(this, scan, store);
+		this.cfg = cfg;
+		this.synStmt = new SynChkStmt(this, scan, store, cfg);
+		this.synExpr = new SynChkExpr(this, scan, store, cfg);
 		synStmt.init();
 		synExpr.init();
 	}

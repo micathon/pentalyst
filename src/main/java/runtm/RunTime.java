@@ -6,6 +6,7 @@ import iconst.KeywordTyp;
 import iconst.NodeCellTyp;
 import iconst.TokenTyp;
 import iconst.PageTyp;
+import config.Config;
 import page.Node;
 import page.AddrNode;
 import page.Store;
@@ -46,6 +47,7 @@ public class RunTime implements IConst, RunConst {
 	private int utKeyValIdx;
 	private boolean isBadUtPair;
 	private int runidx;
+	private Config cfg;
 	private static final char SP = ' ';
 	public HashMap<String, Integer> glbFunMap;
 	public HashMap<String, Integer> glbLocVarMap;
@@ -54,11 +56,12 @@ public class RunTime implements IConst, RunConst {
 	public ArrayList<String> glbFuncNames;
 	public ArrayList<String> utKeyValList;
 
-	public RunTime(Store store, ScanSrc scanSrc, SynChk synChk) {
+	public RunTime(Store store, ScanSrc scanSrc, SynChk synChk, Config cfg) {
 		this.store = store;
 		this.scanSrc = scanSrc;
 		this.synChk = synChk;
-		pp = new RunPushPop(store, this);
+		this.cfg = cfg;
+		pp = new RunPushPop(store, this, cfg);
 		runop = new RunOperators(store, this, pp);
 		rcall = new RunCall(store, this, pp);
 		rfc = new RunFlowCtrl(store, this, pp, runop);
