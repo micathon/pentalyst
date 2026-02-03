@@ -1,17 +1,20 @@
 package com.app;
 
 import init.InitMain;
+import config.Config;
 
 public class pny {
 
 	public static void main(String[] args) {
-		InitMain initobj = new InitMain();
+		InitMain initobj;
+		Config cfg;
 		String fileName = "";
 		String filePath = "";
 		boolean isUnitTest = false;
 		boolean isMain = false;
 		boolean isRunTest = false;
 
+		cfg = new Config(false);
 		if (args.length == 1) {
 			filePath = "/dat/";
 			fileName = args[0] + ".pny";
@@ -37,6 +40,7 @@ public class pny {
 			System.out.println("Usage: java pny [filename]");
 			return;
 		}
+		initobj = new InitMain(cfg);
 		filePath = System.getenv("PNY_HOME") + filePath;
 		initobj.runInit(filePath, fileName, isUnitTest, isMain, isRunTest);
 	}
