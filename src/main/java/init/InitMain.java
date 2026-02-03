@@ -3,6 +3,7 @@ package init;
 import iconst.IConst;
 import iconst.PageTyp;
 import iconst.TokenTyp;
+import config.Config;
 import page.Store;
 import page.Page;
 import page.AddrNode;
@@ -38,11 +39,13 @@ public class InitMain implements IConst {
 	private int pageIdx = 0;
 	private int rootNodep;
 	private boolean isBadUtPair;
+	private Config cfg;
 	private static final boolean isSilent = false;
 	private static final boolean isVerbose = false;
 
-	public InitMain() {
-		store = new Store();
+	public InitMain(Config cfg) {
+		this.cfg = cfg;
+		store = new Store(cfg);
 	}
 	
 	public void runInit(String filePath, String fileName,
@@ -50,7 +53,7 @@ public class InitMain implements IConst {
 	{
 		String fullFileName;
 		boolean isSuccess;
-		
+
 		fullFileName = filePath + fileName;
 		if (isMain && isUnitTest) {
 			doMasterFile(fullFileName);
@@ -137,11 +140,11 @@ public class InitMain implements IConst {
 		boolean fatalErr = false;
 		boolean rtnval = true;
 
-		scanSrc = new ScanSrc(store, fileName);
-		synchk = new SynChk(scanSrc, store);
+		scanSrc = new ScanSrc(store, fileName, cfg);
+		synchk = new SynChk(scanSrc, store, cfg);
 		fileName = path + fileName;
 		rootNodep = scanSrc.rootNodep;
-		runtm = new RunScanner(store, scanSrc, synchk, rootNodep);
+		runtm = new RunScanner(store, scanSrc, synchk, rootNodep, cfg);
 		scanSrc.setSynChk(synchk);
 		synchk.isUnitTest = isUnitTest;
 		if (isUnitTest) {
@@ -182,8 +185,8 @@ public class InitMain implements IConst {
 		boolean endPrgFinish;
 		boolean rtnval = true;
 
-		scanSrc = new ScanSrc(store, fileName);
-		synchk = new SynChk(scanSrc, store);
+		scanSrc = new ScanSrc(store, fileName, cfg);
+		synchk = new SynChk(scanSrc, store, cfg);
 		scanSrc.setSynChk(synchk);
 		rootNodep = scanSrc.rootNodep;
 		fileName = path + fileName;
@@ -231,7 +234,7 @@ public class InitMain implements IConst {
 		boolean rtnval = true;
 		
 		scanSrc.setEndFound(false);
-		runtm = new RunScanner(store, scanSrc, synchk, rootNodep);
+		runtm = new RunScanner(store, scanSrc, synchk, rootNodep, cfg);
 		if (scanSrc.inCmtBlk) {
 			scanSrc.putErr(TokenTyp.ERRINCMTEOF);
 		}
