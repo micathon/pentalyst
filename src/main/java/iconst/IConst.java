@@ -1,7 +1,7 @@
 package iconst;
 
 public interface IConst {
-	int idebug = 1;
+	int idebug = 0;
 	int irtbug = idebug;
 	int WRDPGLEN = 2048;
 	int INTPGLEN = 1024;
@@ -13,6 +13,7 @@ public interface IConst {
 	int NODECOUNT = WRDPGLEN / NODESIZ;
 	int BYTHDRLEN = 256;  // not 64
 	String DEFPROMPT = "> ";
+	char SEPCH = '.';
 	int RESERR = -1;
 	int RESOK = 0;
 	int RESFREE = 1;
