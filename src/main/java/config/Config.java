@@ -15,7 +15,7 @@ public class Config implements IConst {
 	private boolean debug = false;
 	private boolean fileout = false;
 	private boolean valid = false;
-	private char sepch;
+	private char sepch = SEPCH;
 	private boolean unchanged = false;
 	private boolean isDirty = false;
 	private boolean unitTestFlag = false;
@@ -24,6 +24,7 @@ public class Config implements IConst {
 	private String configFileName = "/config.txt";
 	private String configFullFileName;
 	private String outFileName;
+	private String omsgbuf = "";
 	private char dchar = 'd';
 	private char fchar = 'f';
 	private char uchar = 'u';
@@ -31,12 +32,16 @@ public class Config implements IConst {
 	private char xchar = 'x';
 	private char pchar = 'p';
 
-	public Config(String filePath, String fileName, String sepWord) {
+	public Config(String filePath, String fileName, 
+		String sepWord, String outFileName) 
+	{
 		Path fPath; 
 
+		omsg("Config: top");
+		this.outFileName = outFileName;
 		configFullFileName = filePath + configFileName;
 		fPath = Path.of(configFullFileName);
-		sepWord = configRtn(fileName, sepWord);
+		sepWord = configRtn(sepWord);
 		if (!valid) {
 			return;
 		}
@@ -54,7 +59,7 @@ public class Config implements IConst {
 		}
 	}
 
-	public String configRtn(String fileName, String sepWord) {
+	public String configRtn(String sepWord) {
 		char ch;
 		int dpos;
 		int fpos;
@@ -63,10 +68,13 @@ public class Config implements IConst {
 		int switchCount = 0;
 		
 		if (sepWord == "") {
+			omsg("configRtn: sepWord = null string");
 			sepWord = getSepWord();
 		}
+		omsg("configRtn: sepWord = " + sepWord);
 		ch = sepWord.charAt(0);
 		if (ch != sepch) {
+			omsg("invalid: no dot at front of sepWord");
 			return "";
 		}
 		sepWord = sepWord.substring(1);
@@ -90,9 +98,11 @@ public class Config implements IConst {
 		upos = sepWord.indexOf("" + uchar);
 		rpos = sepWord.indexOf("" + rchar);
 		if ((upos >= 0) && (rpos >= 0)) {
+			omsg("invalid: .ur found");
 			return "";
 		}
 		if (sepWord.length() > 3) {
+			omsg("invalid: arg too long");
 			return "";
 		}
 		switchCount += (dpos >= 0) ? 1 : 0; 
@@ -100,6 +110,7 @@ public class Config implements IConst {
 		switchCount += (upos >= 0) ? 1 : 0; 
 		switchCount += (rpos >= 0) ? 1 : 0;
 		if (switchCount != sepWord.length()) {
+			omsg("invalid: bad switches (dups, bad chars.)");
 			return "";
 		}
 		if (dpos >= 0) {
@@ -107,6 +118,8 @@ public class Config implements IConst {
 		}
 		if (fpos >= 0) {
 			fileout = true;
+			omsg("configRtn: fpos >= 0");
+			setFileOut();
 		}
 		if (upos >= 0) {
 			unitTestFlag = true;
@@ -203,9 +216,55 @@ public class Config implements IConst {
 		return doCmdPrompt;
 	}
 	
+	public void omsg(String msg) {  
+		if (idebug == 1) {
+			omsgbuf += msg;
+			System.out.println(omsgbuf);
+			omsgbuf = "";
+		}
+	}
+	
+	public void omsgz(String msg) {  
+		if (idebug == 1) {
+			omsgbuf += msg;
+		}
+	}
+	
 	public Config(String outFileName) {
 		// display help info
 		this.outFileName = outFileName;
+		omsg("invalid: Config(s)");
+	}
+
+	public void setFileOut() {
+        Path fPath;
+		PrintStream originalOut = System.out;
+		PrintStream fileOut;
+		boolean success = true;
+
+		omsg("setFileOut: outFileName = " + outFileName);
+		fPath = Paths.get(outFileName);
+		try {
+            Files.createFile(fPath);
+		}
+		catch (java.nio.file.FileAlreadyExistsException e) {
+			//
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+			success = false;
+		}
+		if (!success) {
+			return;
+		}
+		try {
+			fileOut = new PrintStream(new File(outFileName));
+			System.setOut(fileOut);
+		} 
+		catch (IOException e) {
+			System.setOut(originalOut);
+			e.printStackTrace();
+		}
 	}
 	
 	public void displayHelp() {
@@ -278,8 +337,11 @@ public class Config implements IConst {
 		System.out.println(". all by itself:");
 		System.out.println("  - use default settings");
 		System.out.println("");
-		System.out.println("no command line argument:");
+		System.out.println("no switches:");
 		System.out.println("  - don't change settings");
+		System.out.println("");
+		System.out.println("no command line argument:");
+		System.out.println("  - display help info");
 		System.out.println("");
 		System.out.println("pny-cmd file name:");
 		System.out.println("  - Pentalyst source file w/o ext");
