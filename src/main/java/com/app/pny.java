@@ -11,7 +11,7 @@ public class pny implements IConst {
 		Config cfg = null;
 		String fileName = "";
 		String filePath = "";
-		String fileMidPath;
+		String fileMidPath = "";
 		String pnyHomeFileName;
 		String sep = "" + SEPCH;
 		String arg = "";
@@ -23,6 +23,7 @@ public class pny implements IConst {
 		boolean isUnitTest = false;
 		boolean isMain = false;
 		boolean isRunTest = false;
+		boolean isCmdLoop;
 
 		pnyHomeFileName = System.getenv("PNY_HOME");
 		outFullFileName = pnyHomeFileName + outFileName; 
@@ -65,6 +66,7 @@ public class pny implements IConst {
 		isMain = fileName.equals("main");
 		isUnitTest = cfg.isUnitTest();
 		isRunTest = cfg.isRunTest();
+		isCmdLoop = cfg.isCmdPrompt();
 		if (isUnitTest) {
 			fileMidPath = "/dat/test/";
 			fileName += ".test";
@@ -72,6 +74,9 @@ public class pny implements IConst {
 		else if (isRunTest) {
 			fileMidPath = "/dat/rt/";
 			fileName += ".test";
+		}
+		else if (isCmdLoop) {
+			fileName = "";
 		}
 		else {
 			fileMidPath = "/dat/";
