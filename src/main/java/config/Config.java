@@ -29,7 +29,7 @@ public class Config implements IConst {
 	private char fchar = 'f';
 	private char uchar = 'u';
 	private char rchar = 'r';
-	private char xchar = 'x';
+	//private char xchar = 'x';
 	private char pchar = 'p';
 
 	public Config(String filePath, String fileName, 
@@ -85,13 +85,14 @@ public class Config implements IConst {
 		}
 		ch = sepWord.charAt(0);
 		if (sepWord.length() > 1) { }
+		/*
 		else if (ch == xchar) {
 			sepWord = cancelUnitTest();
 			return sepWord;
-		}
+		} */
 		else if (ch == pchar) {
 			displayCmdPrompt();
-			return "";  // must detect 'p' in calling routine
+			return ""; 
 		}
 		dpos = sepWord.indexOf("" + dchar);
 		fpos = sepWord.indexOf("" + fchar);
@@ -184,29 +185,7 @@ public class Config implements IConst {
 	public boolean isRunTest() {
 		return runTestFlag;
 	}
-	
-	private String cancelUnitTest() {
-		// must return d/f sepWord, no u/r
-		String sepWord;
-		int dpos;
-		int fpos;
 
-		sepWord = getRawSepWord();
-		dpos = sepWord.indexOf("" + dchar);
-		fpos = sepWord.indexOf("" + fchar);
-		sepWord = "";
-		if (dpos >= 0) {
-			debug = true;
-			sepWord += dchar;
-		}
-		if (fpos >= 0) {
-			fileout = true;
-			sepWord += fchar;
-		}
-		isDirty = true;
-		return sepWord;  
-	}
-	
 	private void displayCmdPrompt() {
 		doCmdPrompt = true;
 		valid = true;
@@ -310,7 +289,7 @@ public class Config implements IConst {
 		System.out.println("[file name w/o ext][.switches]");
 		System.out.println("");
 		System.out.println("switches:");
-		System.out.println("d, f, u, r, x, p");
+		System.out.println("d, f, u, r, p");
 		System.out.println("");
 	}
 
@@ -322,16 +301,16 @@ public class Config implements IConst {
 		System.out.println(".f - output to file");
 		System.out.println(".u - unit test");
 		System.out.println(".r - run-unit test");
-		System.out.println(".x - cancel unit test");
+		//System.out.println(".x - cancel unit test");
 		System.out.println(".p - display cmd prompt");
 		System.out.println("");
 		System.out.println(".u | .r - cannot combine u and r switches");
 		System.out.println(".ur - illegal");
-		System.out.println(".x - d/f settings unchanged");
-		System.out.println(".p - file name is omitted");
+		//System.out.println(".x - d/f settings unchanged");
+		//System.out.println(".p - file name is omitted");
 		System.out.println("");
-		System.out.println("lone switches:");
-		System.out.println(".x - no other switches allowed");
+		System.out.println("lone switch:");
+		//System.out.println(".x - no other switches allowed");
 		System.out.println(".p - no other switches allowed");
 		System.out.println("");
 		System.out.println(". all by itself:");
@@ -352,5 +331,27 @@ public class Config implements IConst {
 		System.out.println(".u - off");
 		System.out.println(".r - off");
 	}
+	/*
+	private String cancelUnitTest() {
+		// must return d/f sepWord, no u/r
+		String sepWord;
+		int dpos;
+		int fpos;
 
+		sepWord = getRawSepWord();
+		dpos = sepWord.indexOf("" + dchar);
+		fpos = sepWord.indexOf("" + fchar);
+		sepWord = "";
+		if (dpos >= 0) {
+			debug = true;
+			sepWord += dchar;
+		}
+		if (fpos >= 0) {
+			fileout = true;
+			sepWord += fchar;
+		}
+		isDirty = true;
+		return sepWord;  
+	}
+	*/
 }
