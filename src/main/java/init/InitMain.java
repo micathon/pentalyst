@@ -56,10 +56,10 @@ public class InitMain implements IConst {
 
 		fullFileName = filePath + fileName;
 		if (isMain && isUnitTest) {
-			doMasterFile(fullFileName);
+			doMasterFile(fullFileName, filePath);
 		}
 		else if (isMain) {
-			doMasterUtFile(fullFileName);
+			doMasterUtFile(fullFileName, filePath);
 		}
 		else if (fileName.length() == 0) {
 			// isMain & isUnitTest both false
@@ -74,9 +74,8 @@ public class InitMain implements IConst {
 		}
 	}
 	
-	private void doMasterFile(String mainFileName) {
+	private void doMasterFile(String mainFileName, String filePath) {
 		String fileName;
-		String filePath;
 		String srcFileName;
 		BufferedReader fbr;
 		boolean isFail;
@@ -90,7 +89,6 @@ public class InitMain implements IConst {
 					continue;
 				}
 				omsg("Unit test: " + fileName);
-				filePath = "../dat/test/";
 				srcFileName = fileName + ".test";
 				isFail = doSrcFile(filePath, srcFileName, true);
 				isGlbFail = isGlbFail || isFail;
@@ -101,9 +99,8 @@ public class InitMain implements IConst {
 		}
 	}
 	
-	private void doMasterUtFile(String mainFileName) {
+	private void doMasterUtFile(String mainFileName, String filePath) {
 		String fileName;
-		String filePath;
 		String srcFileName;
 		BufferedReader fbr;
 		boolean isGood;
@@ -117,7 +114,6 @@ public class InitMain implements IConst {
 					continue;
 				}
 				omsg("Unit test: " + fileName);
-				filePath = "../dat/rt/";
 				srcFileName = fileName + ".test";
 				isGood = doSrcUtFile(filePath, srcFileName);
 				showSrcUtFileResult(fileName, isGood);
