@@ -14,7 +14,7 @@ public class pny implements IConst {
 		String fileMidPath;
 		String pnyHomeFileName;
 		String sep = "" + SEPCH;
-		String arg;
+		String arg = "";
 		String sepWord = "";
 		String outFileName = "/out.txt";
 		String outFullFileName;
@@ -24,24 +24,29 @@ public class pny implements IConst {
 		boolean isMain = false;
 		boolean isRunTest = false;
 
-		arg = args[0];
-		if (arg.length() == 0) {
+		pnyHomeFileName = System.getenv("PNY_HOME");
+		outFullFileName = pnyHomeFileName + outFileName; 
+		if (args.length == 0) {
 			argExists = false;
 			cfg = new Config();
 		}
-		pnyHomeFileName = System.getenv("PNY_HOME");
-		idx = arg.indexOf(sep);
-		if (idx >= 0) {
-			sepWord = arg.substring(idx);
-			fileName = arg.substring(0, idx);
-		}
-		else if (argExists) {
-			fileName = arg;
+		else {
+			arg = args[0];
 		}
 		if (argExists) {
+			idx = arg.indexOf(sep);
+			omsg("main: idx = " + idx);
+			if (idx >= 0) {
+				sepWord = arg.substring(idx);
+				fileName = arg.substring(0, idx);
+			}
+			else {
+				fileName = arg;
+			}
+			omsg("main: fileName = " + fileName);
 			// process config block
 			filePath = pnyHomeFileName;
-			cfg = new Config(filePath, fileName, sepWord);
+			cfg = new Config(filePath, fileName, sepWord, outFullFileName);
 			if (!cfg.isValid()) {
 				System.out.println(
 					"Argument entered in command line is invalid."
@@ -52,7 +57,6 @@ public class pny implements IConst {
 		}
 		if (!argExists) {
 			// display help info:
-			outFullFileName = pnyHomeFileName + outFileName; 
 			cfg = new Config(outFullFileName);
 			cfg.displayHelp();
 			return;
@@ -63,19 +67,25 @@ public class pny implements IConst {
 		isRunTest = cfg.isRunTest();
 		if (isUnitTest) {
 			fileMidPath = "/dat/test/";
-			fileName = args[0] + ".test";
+			fileName += ".test";
 		}
 		else if (isRunTest) {
 			fileMidPath = "/dat/rt/";
-			fileName = args[0] + ".test";
+			fileName += ".test";
 		}
 		else {
 			fileMidPath = "/dat/";
-			fileName = args[0] + ".pny";
+			fileName += ".pny";
 		}
 		initobj = new InitMain(cfg);
 		filePath = filePath + fileMidPath;
 		initobj.runInit(filePath, fileName, isUnitTest, isMain, isRunTest);
+	}
+	
+	public static void omsg(String msg) {  
+		if (idebug == 1) {
+			System.out.println(msg);
+		}
 	}
 	
 }
