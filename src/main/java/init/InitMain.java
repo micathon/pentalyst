@@ -62,6 +62,7 @@ public class InitMain implements IConst {
 			doMasterUtFile(fullFileName);
 		}
 		else if (fileName.length() == 0) {
+			// isMain & isUnitTest both false
 			doCmdLoop();
 		}
 		else if (isRunTest) {
