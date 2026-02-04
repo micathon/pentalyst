@@ -12,9 +12,12 @@ public class pny implements IConst {
 		String fileName = "";
 		String filePath = "";
 		String fileMidPath;
+		String pnyHomeFileName;
 		String sep = "" + SEPCH;
 		String arg;
 		String sepWord = "";
+		String outFileName = "/out.txt";
+		String outFullFileName;
 		int idx;
 		boolean argExists = true;
 		boolean isUnitTest = false;
@@ -26,6 +29,7 @@ public class pny implements IConst {
 			argExists = false;
 			cfg = new Config();
 		}
+		pnyHomeFileName = System.getenv("PNY_HOME");
 		idx = arg.indexOf(sep);
 		if (idx >= 0) {
 			sepWord = arg.substring(idx);
@@ -36,18 +40,21 @@ public class pny implements IConst {
 		}
 		if (argExists) {
 			// process config block
-			filePath = System.getenv("PNY_HOME");
+			filePath = pnyHomeFileName;
 			cfg = new Config(filePath, fileName, sepWord);
 			if (!cfg.isValid()) {
 				System.out.println(
 					"Argument entered in command line is invalid."
 				);
+				System.out.println("");
 				argExists = false;
 			}
 		}
 		if (!argExists) {
-			// display help info...
-			cfg.displayHelpInfo();
+			// display help info:
+			outFullFileName = pnyHomeFileName + outFileName; 
+			cfg = new Config(outFullFileName);
+			cfg.displayHelp();
 			return;
 		}
 		// config block has been executed
