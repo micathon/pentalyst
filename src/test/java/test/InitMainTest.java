@@ -10,7 +10,7 @@ public class InitMainTest {
 
   @Test
   public void testFactorial() {
-	  Config cfg = new Config(true);
+	  Config cfg = new Config();
 	  InitMain ex = new InitMain(cfg);
 	  assertEquals(ex.factorial(4), 24);
 	  assertEquals(ex.factorial(5), 120);
