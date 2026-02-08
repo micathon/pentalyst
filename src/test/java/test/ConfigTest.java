@@ -20,6 +20,10 @@ public class ConfigTest {
 	@Test
 	public void testUseDefaults() {
 		Config cfg = new Config();
+		goDefaults(cfg);
+	}
+		
+	private void goDefaults(Config cfg) {
 		cfg.useDefaults();
 		assertFalse(cfg.isDebug());
 		assertFalse(cfg.isFileOut());
@@ -88,6 +92,68 @@ public class ConfigTest {
 		cfg = useSepWord(sepWord);
 		errCode = cfg.badSepErrCode();
 		assertEquals(errCode, 4);
+	}
+
+	@Test
+	public void testConfigDebug() {
+		Config cfg;
+		String sepWord = ".d";
+
+		cfg = useSepWord(sepWord);
+		assertTrue(cfg.isDebug());
+		assertFalse(cfg.isFileOut());
+		assertFalse(cfg.isUnitTest());
+		assertFalse(cfg.isRunTest());
+		assertFalse(cfg.isCmdPrompt());
+	}
+
+	@Test
+	public void testConfigFileOut() {
+		Config cfg;
+		String sepWord = ".f";
+
+		cfg = useSepWord(sepWord);
+		assertFalse(cfg.isDebug());
+		assertTrue(cfg.isFileOut());
+		assertFalse(cfg.isUnitTest());
+		assertFalse(cfg.isRunTest());
+		assertFalse(cfg.isCmdPrompt());
+	}
+
+	@Test
+	public void testConfigRunTest() {
+		Config cfg;
+		String sepWord = ".r";
+
+		cfg = useSepWord(sepWord);
+		assertTrue(cfg.isRunTest());
+		assertFalse(cfg.isDebug());
+		assertFalse(cfg.isFileOut());
+		assertFalse(cfg.isUnitTest());
+		assertFalse(cfg.isCmdPrompt());
+	}
+
+	@Test
+	public void testConfigUnitTest() {
+		Config cfg;
+		String sepWord = ".u";
+
+		cfg = useSepWord(sepWord);
+		assertTrue(cfg.isUnitTest());
+		assertFalse(cfg.isDebug());
+		assertFalse(cfg.isFileOut());
+		assertFalse(cfg.isRunTest());
+		assertFalse(cfg.isCmdPrompt());
+	}
+
+	@Test
+	public void testConfigDefaults() {
+		Config cfg;
+		String sepWord = ".";
+
+		cfg = useSepWord(sepWord);
+		goDefaults(cfg);
+		//assertFalse(!cfg.isDebug());
 	}
 
 }
