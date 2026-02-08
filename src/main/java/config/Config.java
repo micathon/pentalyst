@@ -25,7 +25,7 @@ public class Config implements IConst {
 	private String configFullFileName;
 	private String outFileName;
 	private String omsgbuf = "";
-	private int badSepErrCode;
+	private int badSepErrCode; // -ve values not errors
 	private char dchar = 'd';
 	private char fchar = 'f';
 	private char uchar = 'u';
@@ -161,6 +161,7 @@ public class Config implements IConst {
         } catch (IOException e) {
         	sepWord = "";
         }
+        badSepErrCode = -1;
 		return sepWord;
 	}
 	
