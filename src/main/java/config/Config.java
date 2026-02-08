@@ -25,6 +25,7 @@ public class Config implements IConst {
 	private String configFullFileName;
 	private String outFileName;
 	private String omsgbuf = "";
+	private int badSepErrCode;
 	private char dchar = 'd';
 	private char fchar = 'f';
 	private char uchar = 'u';
@@ -32,9 +33,7 @@ public class Config implements IConst {
 	//private char xchar = 'x';
 	private char pchar = 'p';
 
-	public Config(String filePath, String fileName, 
-		String sepWord, String outFileName) 
-	{
+	public Config(String filePath, String sepWord, String outFileName) {
 		Path fPath; 
 
 		omsg("Config: top");
@@ -75,6 +74,7 @@ public class Config implements IConst {
 		ch = sepWord.charAt(0);
 		if (ch != sepch) {
 			omsg("invalid: no dot at front of sepWord");
+			badSepErrCode = 1;
 			return "";
 		}
 		sepWord = sepWord.substring(1);
@@ -85,11 +85,6 @@ public class Config implements IConst {
 		}
 		ch = sepWord.charAt(0);
 		if (sepWord.length() > 1) { }
-		/*
-		else if (ch == xchar) {
-			sepWord = cancelUnitTest();
-			return sepWord;
-		} */
 		else if (ch == pchar) {
 			displayCmdPrompt();
 			return ""; 
@@ -100,10 +95,12 @@ public class Config implements IConst {
 		rpos = sepWord.indexOf("" + rchar);
 		if ((upos >= 0) && (rpos >= 0)) {
 			omsg("invalid: .ur found");
+			badSepErrCode = 2;
 			return "";
 		}
 		if (sepWord.length() > 3) {
 			omsg("invalid: arg too long");
+			badSepErrCode = 3;
 			return "";
 		}
 		switchCount += (dpos >= 0) ? 1 : 0; 
@@ -112,6 +109,7 @@ public class Config implements IConst {
 		switchCount += (rpos >= 0) ? 1 : 0;
 		if (switchCount != sepWord.length()) {
 			omsg("invalid: bad switches (dups, bad chars.)");
+			badSepErrCode = 4;
 			return "";
 		}
 		if (dpos >= 0) {
@@ -138,7 +136,7 @@ public class Config implements IConst {
 		useDefaults();
 	}
 	
-	private void useDefaults() {
+	public void useDefaults() {
 		// use defaults
 		isDirty = true;
 	}
@@ -164,6 +162,10 @@ public class Config implements IConst {
         	sepWord = "";
         }
 		return sepWord;
+	}
+	
+	public int badSepErrCode() {
+		return badSepErrCode;
 	}
 	
 	public boolean isValid() {
@@ -331,27 +333,5 @@ public class Config implements IConst {
 		System.out.println(".u - off");
 		System.out.println(".r - off");
 	}
-	/*
-	private String cancelUnitTest() {
-		// must return d/f sepWord, no u/r
-		String sepWord;
-		int dpos;
-		int fpos;
 
-		sepWord = getRawSepWord();
-		dpos = sepWord.indexOf("" + dchar);
-		fpos = sepWord.indexOf("" + fchar);
-		sepWord = "";
-		if (dpos >= 0) {
-			debug = true;
-			sepWord += dchar;
-		}
-		if (fpos >= 0) {
-			fileout = true;
-			sepWord += fchar;
-		}
-		isDirty = true;
-		return sepWord;  
-	}
-	*/
 }
