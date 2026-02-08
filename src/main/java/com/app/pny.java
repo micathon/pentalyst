@@ -47,7 +47,7 @@ public class pny implements IConst {
 			omsg("main: fileName = " + fileName);
 			// process config block
 			filePath = pnyHomeFileName;
-			cfg = new Config(filePath, fileName, sepWord, outFullFileName);
+			cfg = new Config(filePath, sepWord, outFullFileName);
 			if (!cfg.isValid()) {
 				System.out.println(
 					"Argument entered in command line is invalid."
