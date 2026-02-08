@@ -160,11 +160,14 @@ public class ConfigTest {
 	public void testConfigGetSepWord() {
 		Config cfg;
 		String sepWord = ".df";
+		int errCode;
 
 		cfg = useSepWord(sepWord);
 		goTestSepWord(cfg);
 		sepWord = "";
 		cfg = useSepWord(sepWord);
+		errCode = cfg.badSepErrCode();
+		assertEquals(errCode, -1);
 		goTestSepWord(cfg);
 		//assertTrue(!cfg.isDebug());
 	}
