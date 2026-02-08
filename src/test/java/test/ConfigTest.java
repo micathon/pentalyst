@@ -156,4 +156,26 @@ public class ConfigTest {
 		//assertFalse(!cfg.isDebug());
 	}
 
+	@Test
+	public void testConfigGetSepWord() {
+		Config cfg;
+		String sepWord = ".df";
+
+		cfg = useSepWord(sepWord);
+		goTestSepWord(cfg);
+		sepWord = "";
+		cfg = useSepWord(sepWord);
+		goTestSepWord(cfg);
+		//assertTrue(!cfg.isDebug());
+	}
+
+	private void goTestSepWord(Config cfg) {
+		cfg.useDefaults();
+		assertTrue(cfg.isDebug());
+		assertTrue(cfg.isFileOut());
+		assertFalse(cfg.isUnitTest());
+		assertFalse(cfg.isRunTest());
+		assertFalse(cfg.isCmdPrompt());
+	}
+	
 }
