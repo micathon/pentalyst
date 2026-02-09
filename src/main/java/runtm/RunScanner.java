@@ -58,6 +58,7 @@ public class RunScanner implements IConst, RunConst {
 	}
 
 	public boolean run(int runidx) {
+		// called from InitMain
 		boolean rtnval;
 		
 		omsg("RunTime.run: rootNodep = " + rootNodep);
