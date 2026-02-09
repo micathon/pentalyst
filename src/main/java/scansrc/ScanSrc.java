@@ -119,6 +119,13 @@ public class ScanSrc implements IConst {
 		currNodep = rootNodep;
 	}
 	
+	private boolean chkSynSrcFile() {
+		// check syntax of source file
+		boolean isValid;
+		isValid = synchk.isValidSrc();
+		return isValid;
+	}
+	
 	public boolean scanCodeBuf(String inbuf, boolean isRunTest) {
 		char sp = ' ';
 		char ch = sp;
@@ -599,7 +606,7 @@ public class ScanSrc implements IConst {
 			omsg("Fatal error encountered!");
 			return false;
 		}
-		if (!fatalErr && isClean && synchk.isValidSrc()) {
+		if (!fatalErr && isClean && chkSynSrcFile()) {
 			omsg("Src file is valid.");
 			return true;
 		}
