@@ -1923,6 +1923,7 @@ public class ScanSrc implements IConst {
 		case STRCAT: return "+";
 		case STAR: return "*";
 		case DBLSTAR: return "**";
+		case SLICE: return "@";
 		default: return "";
 		}
 	}
@@ -1959,6 +1960,7 @@ public class ScanSrc implements IConst {
 		case '?': return KeywordTyp.QUEST;
 		case '~': return KeywordTyp.NOTBITZ;
 		case '!': return KeywordTyp.NOT;
+		case '@': return KeywordTyp.SLICE;
 		}
 		return KeywordTyp.NULL;
 	}
