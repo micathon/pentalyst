@@ -65,6 +65,8 @@ public class SynChk {
 		int lineno;
 		String preLineNoStr;
 		
+		cfg.setModNo(modno);
+		cfg.setModErrNo(currbrk);
 		lineno = store.lookupLineNo(nodep);
 		if (!isUnitTest) { }
 		else if (brkval == 0.0) {
