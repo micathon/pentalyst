@@ -74,6 +74,10 @@ public class InitMain implements IConst {
 		}
 	}
 	
+	public void runInitFile(String filePath, String fileName) {
+		runInit(filePath, fileName, false, false, false);
+	}
+	
 	private void doMasterFile(String mainFileName, String filePath) {
 		String fileName;
 		String srcFileName;
