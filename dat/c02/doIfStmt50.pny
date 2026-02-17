@@ -1,0 +1,11 @@
+do (
+gdefun do (
+  p 1;
+);
+defun (p x) do (
+  if (ne x 2) do (
+    set x 0;
+  )
+  set x 88;
+);
+)

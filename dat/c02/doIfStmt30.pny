@@ -1,0 +1,8 @@
+do (
+gdefun do (
+  p 1;
+);
+defun (p x) do (
+  if (eq x 2);
+);
+)

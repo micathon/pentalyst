@@ -1,0 +1,10 @@
+do (
+gdefun do (
+  p 1;
+);
+defun (p x) do (
+  if (+ x) do (
+    println "hello";
+  );
+);
+)
