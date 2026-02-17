@@ -32,6 +32,8 @@ public class Config implements IConst {
 	private char rchar = 'r';
 	//private char xchar = 'x';
 	private char pchar = 'p';
+	private int modno;
+	private int moderrno;
 
 	public Config(String filePath, String sepWord, String outFileName) {
 		Path fPath; 
@@ -139,6 +141,8 @@ public class Config implements IConst {
 	public void useDefaults() {
 		// use defaults
 		isDirty = true;
+		modno = 0;
+		moderrno = 0;
 	}
 	
 	private String getSepWord() {
@@ -196,6 +200,28 @@ public class Config implements IConst {
 
 	public boolean isCmdPrompt() {
 		return doCmdPrompt;
+	}
+	
+	public int getModNo() {
+		return modno;
+	}
+	
+	public void setModNo(int modno) {
+		this.modno = modno;
+	}
+	
+	public int getModErrNo() {
+		return moderrno;
+	}
+	
+	public void setModErrNo(double errval) {
+		int moderrno;
+		moderrno = (int) Math.round(errval * 100.0);
+		this.moderrno = moderrno;
+	}
+	
+	public int getFullErrNo(int modno, int moderrno) {
+		return moderrno + (100000 * modno);
 	}
 	
 	public void omsg(String msg) {  
