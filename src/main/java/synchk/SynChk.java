@@ -64,9 +64,8 @@ public class SynChk {
 		// see doStmt method for further unit test-related comments
 		int lineno;
 		String preLineNoStr;
-		
-		cfg.setModNo(modno);
-		cfg.setModErrNo(currbrk);
+
+		cfg.trapError(modno, currbrk);
 		lineno = store.lookupLineNo(nodep);
 		if (!isUnitTest) { }
 		else if (brkval == 0.0) {
