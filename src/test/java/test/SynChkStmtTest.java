@@ -28,26 +28,24 @@ public class SynChkStmtTest {
 		return cfg;
 	}
 	
-	@Test
-	public void doIfStmt10() {
-		int errno;
+	public void doIfStmt(int errno) {
+		int fullerrno;
 		int moderrno;
 		Config cfg;
-		cfg = runTest("doIfStmt", 10);
+		cfg = runTest("doIfStmt", errno);
 		moderrno = cfg.getModErrNo();
-		errno = cfg.getFullErrNo(modno, moderrno);
-		assertEquals(errno, 203010);
+		fullerrno = cfg.getFullErrNo(modno, moderrno);
+		assertEquals(fullerrno, 203000 + errno);
+	}
+	
+	@Test
+	public void doIfStmt10() {
+		doIfStmt(10);
 	}
 	
 	@Test
 	public void doIfStmt20() {
-		int errno;
-		int moderrno;
-		Config cfg;
-		cfg = runTest("doIfStmt", 20);
-		moderrno = cfg.getModErrNo();
-		errno = cfg.getFullErrNo(modno, moderrno);
-		assertEquals(errno, 203020);
+		doIfStmt(20);
 	}
 	
 }
