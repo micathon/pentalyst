@@ -32,6 +32,7 @@ public class Config implements IConst {
 	private char rchar = 'r';
 	//private char xchar = 'x';
 	private char pchar = 'p';
+	private boolean isErrTrapped;
 	private int modno;
 	private int moderrno;
 
@@ -141,6 +142,7 @@ public class Config implements IConst {
 	public void useDefaults() {
 		// use defaults
 		isDirty = true;
+		isErrTrapped = false;
 		modno = 0;
 		moderrno = 0;
 	}
@@ -214,6 +216,14 @@ public class Config implements IConst {
 		return moderrno;
 	}
 	
+	public boolean getErrTrapped() {
+		return isErrTrapped;
+	}
+	
+	public void setErrTrapped(boolean flag) {
+		isErrTrapped = flag;
+	}
+
 	public void setModErrNo(double errval) {
 		int moderrno;
 		moderrno = (int) Math.round(errval * 100.0);
@@ -222,6 +232,23 @@ public class Config implements IConst {
 	
 	public int getFullErrNo(int modno, int moderrno) {
 		return moderrno + (100000 * modno);
+	}
+	
+	public void trapError(int modno, double errval) {
+		long miderrno;
+		
+		miderrno = Math.round(errval);
+		if (modno != getModNo()) {
+			return;
+		}
+		if (miderrno != (moderrno / 100)) {
+			return;
+		}
+		if (!getErrTrapped()) {
+			setErrTrapped(true);
+			setModNo(modno);
+			setModErrNo(errval);
+		}
 	}
 	
 	public void omsg(String msg) {  
