@@ -1,7 +1,6 @@
 # Contributing to Pentalyst
 * Many thanks for your interest in being a Pentalyst contributor
-* I hope to begin accepting contributions in late 2026
-* Recruitment of contributors will commence after the console-mode version of the Pentalyst compiler is working
+* I hope to begin recruiting beta testers in Q4 2027
 # How to run Pentalyst
 * Install the Java SDK
 * `$ cd path/to/bin`
@@ -13,5 +12,20 @@
 # Roadmap
 * Go to main Pentalyst [website](http://pentalyst.org)
 * Click on Steps
+# Summary
+* Pentalyst console-mode compiler:
+  * By end of 2026
+* Pentalyst GUI-mode compiler
+  * Begin using AI coding assistant
+* Pentalyst client
+* Math whiteboard
+  * By late 2027
+* Beta testers:
+  * Testing occurs Q4 2027
+  * Pentalsite (web) programmers: front and back end
+  * Math tutors and students
+  * Courseware authors
+* Launch website
+  * By early 2028
 # Contact Me
 * Please feel free to send me an email, ask me anything, any comments are always welcome
