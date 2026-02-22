@@ -3,12 +3,14 @@
 * I hope to begin recruiting beta testers in Q4 2027
 # How to run Pentalyst
 * Install the Java SDK
-* `$ cd path/to/bin`
-* `$ java a.pny atest > out.txt`
+* Install Maven
+* `$ cd myprojects/pny`
+* `$ mvn compile exec:java "-Dexec.args=myapp"`
 * text files:
-  * `dat/atest.pny`: sample Pentalyst source code
-  * `bin/out.txt`: used for debugging and logging what my code is doing
-  * both `atest` and `out.txt` file names can be any valid Linux file name (or Windows/Mac)
+  * `pny/dat/myapp.pny`: sample Pentalyst source code
+  * `pny/out.txt`: used for debugging and logging what my code is doing
+* Note: the .class files located here are not current
+* You must build Pentalyst from source code in order to run it
 # Roadmap
 * Go to main Pentalyst [website](http://pentalyst.org)
 * Click on Steps
