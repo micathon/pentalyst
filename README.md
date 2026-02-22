@@ -6,4 +6,4 @@
 # Info for contributors
 * For detailed info, see [Contributing](CONTRIBUTING.md) file, also if desired check out [Code of Conduct](CODE_OF_CONDUCT.md)
 * Not quite ready yet to accept contributions (currently developing code execution of Pentalyst compiler)
-* I hope to begin accepting contributions in late 2026
+* I hope to begin recruiting beta testers in Q4 2027
