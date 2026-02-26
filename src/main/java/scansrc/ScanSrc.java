@@ -123,6 +123,11 @@ public class ScanSrc implements IConst {
 		// check syntax of source file
 		boolean isValid;
 		isValid = synchk.isValidSrc();
+		if (isValid) { }
+		else if (!cfg.getErrTrapped()) {
+			//oprn("chkSynSrcFile: cancel error");
+			cfg.cancelError();
+		}
 		return isValid;
 	}
 	
