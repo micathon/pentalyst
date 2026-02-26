@@ -3,7 +3,9 @@ gdefun do (
   p;
 );
 defun (p) (var x) do (
-  set (+ 2 2) 0;
+  while do (
+    set x 0;
+  );
   println "p: x =" x;
 );
 )
