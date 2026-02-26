@@ -251,6 +251,11 @@ public class Config implements IConst {
 		}
 	}
 	
+	public void cancelError() {
+		modno = 0;
+		moderrno = 0;
+	}
+	
 	public void omsg(String msg) {  
 		if (idebug == 1) {
 			omsgbuf += msg;
