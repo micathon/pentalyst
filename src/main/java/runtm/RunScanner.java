@@ -69,6 +69,7 @@ public class RunScanner implements IConst, RunConst {
 		if (!rtnval) {
 			oprn(getRTorSyntax() + " error detected!");
 		}
+		cfg.cancelError();
 		return rtnval;
 	}
 	
