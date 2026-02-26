@@ -6,6 +6,7 @@ defun (p x) do (
   if (ne x 2) do (
     set x 0;
   )
+  if;
   set x 88;
 );
 )

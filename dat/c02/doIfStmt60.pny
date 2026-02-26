@@ -3,10 +3,12 @@ gdefun do (
   p 1;
 );
 defun (p x) do (
-  if (ne x 2) do (
+  if (ne x 1) do (
     set x 0;
   )
-  else;
+  else; # do ( #;
   set x 88;
+  println "p: x =" x;
+  );
 );
 )

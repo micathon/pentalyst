@@ -1,0 +1,9 @@
+do (
+gdefun do (
+  p;
+);
+defun (p) (var x) do (
+  set x; # 0;
+  println "p: x =" x;
+);
+)
