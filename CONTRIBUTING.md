@@ -20,13 +20,11 @@
 * Pentalyst GUI-mode compiler
   * Begin using AI coding assistant
 * Pentalyst client
-* Math whiteboard
   * By late 2027
 * Beta testers:
   * Testing occurs Q4 2027
   * Pentalsite (web) programmers: front and back end
-  * Math tutors and students
-  * Courseware authors
+  * End-users
 * Launch website
   * By early 2028
 # Contact Me
