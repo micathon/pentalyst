@@ -15,7 +15,9 @@ public class SynChkCommonTest {
 		modstr = "c0" + modno + '/';
 	}
 
-	private Config runTest(String fileName, int miderrno, int errno) {
+	private Config runTest(String fileName, int miderrno, int errno,
+		int suffixNo) 
+	{
 		String filePath;
 		String fileMidPath;
 		InitMain initobj;
@@ -27,7 +29,7 @@ public class SynChkCommonTest {
 		errval /= 100.0;
 		cfg.setModNo(modno);
 		cfg.setModErrNo(errval);
-		fileName += errno;
+		fileName += suffixNo;
 		fileName += ".pny";
 		filePath = System.getenv("PNY_HOME");
 		fileMidPath = "/dat/" + modstr;
@@ -38,11 +40,17 @@ public class SynChkCommonTest {
 	}
 	
 	public void handleStmt(String fileName, int miderrno, int errno) {
+		handleStmtRtn(fileName, miderrno, errno, errno);
+	}
+	
+	public void handleStmtRtn(String fileName, int miderrno, int errno,
+		int suffixNo) 
+	{
 		int fullerrno;
 		int moderrno;
 		Config cfg;
 
-		cfg = runTest(fileName, miderrno, errno);
+		cfg = runTest(fileName, miderrno, errno, suffixNo);
 		moderrno = cfg.getModErrNo();
 		fullerrno = cfg.getFullErrNo(modno, moderrno);
 		assertEquals(fullerrno, (modno * 100000) + (miderrno * 100) + errno);

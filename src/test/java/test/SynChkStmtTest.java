@@ -9,6 +9,13 @@ public class SynChkStmtTest {
 		common.handleStmt(fileName, miderrno, errno);
 	}
 	
+	private void handleStmtRtn(String fileName, int miderrno, int errno,
+		int suffixNo) 
+	{
+		SynChkCommonTest common = new SynChkCommonTest(2); 
+		common.handleStmtRtn(fileName, miderrno, errno, suffixNo);
+	}
+	
 	private void doIfStmt(int errno) {
 		handleStmt("doIfStmt", 30, errno);
 	}
@@ -171,9 +178,87 @@ public class SynChkStmtTest {
 		handleStmt("doForStmt", 100, errno);
 	}
 	
+	private void doForStmtRtn(int errno, int suffixNo) {
+		handleStmtRtn("doForStmt", 100, errno, suffixNo);
+	}
+	
 	@Test
 	public void doForStmt10() {
 		doForStmt(10);
 	}
 	
+	@Test
+	public void doForStmt20() {
+		doForStmt(20);
+	}
+	
+	@Test
+	public void doForStmt30() {
+		doForStmt(30);
+	}
+	
+	@Test
+	public void doForStmt40() {
+		doForStmt(40);
+	}
+	
+	@Test
+	public void doForStmt50() {
+		doForStmt(50);
+	}
+/*	
+	@Test
+	public void doForStmt60() {
+		doForStmt(60);
+	}
+*/	
+	@Test
+	public void doForStmt70() {
+		doForStmt(70);
+	}
+
+	@Test
+	public void doForStmt87() {
+		doForStmt(87);
+	}
+
+	@Test
+	public void doForStmt85() {
+		doForStmt(85);
+	}
+
+	@Test
+	public void doForStmt851() {
+		doForStmtRtn(85, 851);
+	}
+/*
+	@Test
+	public void doForStmt80() {
+		doForStmt(80);
+	}
+
+	@Test
+	public void doForStmt90() {
+		doForStmt(90);
+	}
+*/
+	private void doBoolStmt(int errno) {
+		handleStmt("doBoolStmt", 120, errno);
+	}
+	
+	@Test
+	public void doBoolStmt10() {
+		doBoolStmt(10);
+	}
+
+	@Test
+	public void doBoolStmt20() {
+		doBoolStmt(20);
+	}
+
+	@Test
+	public void doBoolStmt30() {
+		doBoolStmt(30);
+	}
+
 }
