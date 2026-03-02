@@ -524,7 +524,7 @@ public class SynChkStmt {
 		node = store.getNode(rightq);
 		kwtyp = node.getKeywordTyp();
 		if (kwtyp == KeywordTyp.TUPLE) { 
-			return -1; 
+			return -1;  // never
 		}
 		// header has 3 loop control stmts.
 		for (i = 0; i < 3; i++) {
