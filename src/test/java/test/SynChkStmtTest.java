@@ -261,4 +261,64 @@ public class SynChkStmtTest {
 		doBoolStmt(30);
 	}
 
+	private void doSwitchStmt(int errno) {
+		handleStmt("doSwitchStmt", 130, errno);
+	}
+	
+	@Test
+	public void doSwitchStmt05() {
+		doSwitchStmt(5);
+	}
+
+	@Test
+	public void doSwitchStmt10() {
+		doSwitchStmt(10);
+	}
+
+	@Test
+	public void doSwitchStmt15() {
+		doSwitchStmt(15);
+	}
+
+	@Test
+	public void doSwitchStmt20() {
+		doSwitchStmt(20);
+	}
+
+	@Test
+	public void doSwitchStmt25() {
+		doSwitchStmt(25);
+	}
+
+	@Test
+	public void doSwitchStmt30() {
+		doSwitchStmt(30);
+	}
+
+	@Test
+	public void doSwitchStmt35() {
+		doSwitchStmt(35);
+	}
+
+	@Test
+	public void doSwitchStmt40() {
+		doSwitchStmt(40);
+	}
+
+	@Test
+	public void doSwitchStmt45() {
+		doSwitchStmt(45);
+	}
+/*
+	@Test
+	public void doSwitchStmt50() {
+		doSwitchStmt(50);
+	}
+
+	@Test
+	public void doSwitchStmt60() {
+		doSwitchStmt(60);
+	}
+*/
+
 }
