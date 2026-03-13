@@ -1,0 +1,14 @@
+do (
+gdefun do (
+  p 0;
+);
+defun (p x) (var y) do (
+  switch x
+  case 1 do (
+    println "p: x =" x;
+  )
+  case "X" do (
+    println "p: y =" y;
+  );
+);
+)
