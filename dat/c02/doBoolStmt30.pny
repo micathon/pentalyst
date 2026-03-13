@@ -1,0 +1,10 @@
+do (
+gdefun do (
+  p;
+);
+defun (p) (var i j) do (
+  for (set i 0; ? (< i 10) 99; ++ i) do (
+    println "p: i =" i;
+  );
+);
+)
