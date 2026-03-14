@@ -39,6 +39,8 @@ public class SynChkStmtTest {
 	public void doIfStmt40() {
 		doIfStmt(40);
 	}
+	// @Test functions are commented out if (in error) not triggered
+	//
 /*	
 	@Test
 	public void doIfStmt50() {
@@ -320,5 +322,154 @@ public class SynChkStmtTest {
 		doSwitchStmt(60);
 	}
 */
+	private void doTryStmt(int errno) {
+		handleStmt("doTryStmt", 140, errno);
+	}
+	
+	@Test
+	public void doTryStmt0() {
+		doTryStmt(0);
+	}
 
+	@Test
+	public void doTryStmt05() {
+		doTryStmt(5);
+	}
+
+	@Test
+	public void doTryStmt10() {
+		doTryStmt(10);
+	}
+
+	@Test
+	public void doTryStmt20() {
+		doTryStmt(20);
+	}
+
+	@Test
+	public void doTryStmt25() {
+		doTryStmt(25);
+	}
+
+	@Test
+	public void doTryStmt30() {
+		doTryStmt(30);
+	}
+
+	@Test
+	public void doTryStmt35() {
+		doTryStmt(35);
+	}
+
+	@Test
+	public void doTryStmt40() {
+		doTryStmt(40);
+	}
+
+	@Test
+	public void doTryStmt45() {
+		doTryStmt(45);
+	}
+/*
+	@Test
+	public void doTryStmt50() {
+		doTryStmt(50);
+	}
+
+	@Test
+	public void doTryStmt55() {
+		doTryStmt(55);
+	}
+	
+	@Test
+	public void doTryStmt60() {
+		doTryStmt(60);
+	}
+
+	@Test
+	public void doTryStmt70() {
+		doTryStmt(70);
+	}
+
+	@Test
+	public void doTryStmt75() {
+		doTryStmt(75);
+	}
+	
+	@Test
+	public void doTryStmt80() {
+		doTryStmt(80);
+	}
+
+	@Test
+	public void doTryStmt85() {
+		doTryStmt(85);
+	}
+*/	
+	private void doPrintlnStmt(int errno) {
+		handleStmt("doPrintlnStmt", 160, errno);
+	}
+	
+	@Test
+	public void doPrintlnStmt10() {
+		doPrintlnStmt(10);
+	}
+
+	private void doPrintStmt(int errno) {
+		handleStmt("doPrintStmt", 170, errno);
+	}
+	
+	@Test
+	public void doPrintStmt10() {
+		doPrintStmt(10);
+	}
+
+	@Test
+	public void doPrintStmt20() {
+		doPrintStmt(20);
+	}
+
+	private void doReturnStmt(int errno) {
+		handleStmt("doReturnStmt", 200, errno);
+	}
+	
+	@Test
+	public void doReturnStmt10() {
+		doReturnStmt(10);
+	}
+
+	@Test
+	public void doReturnStmt20() {
+		doReturnStmt(20);
+	}
+
+	private void doRaiseStmt(int errno) {
+		handleStmt("doRaiseStmt", 210, errno);
+	}
+	
+	@Test
+	public void doRaiseStmt10() {
+		doRaiseStmt(10);
+	}
+
+	@Test
+	public void doRaiseStmt20() {
+		doRaiseStmt(20);
+	}
+
+	@Test
+	public void doRaiseStmt30() {
+		doRaiseStmt(30);
+	}
+
+	@Test
+	public void doRaiseStmt40() {
+		doRaiseStmt(40);
+	}
+/*
+	@Test
+	public void doRaiseStmt50() {
+		doRaiseStmt(50);
+	}
+*/
 }
