@@ -1,0 +1,8 @@
+do (
+gdefun do (
+  p;
+);
+defun (p) (var x y) do (
+  raise y from x 0;
+);
+)

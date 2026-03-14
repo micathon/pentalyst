@@ -1,0 +1,8 @@
+do (
+gdefun do (
+  p;
+);
+defun (p) (var x y) do (
+  print (+ 0);
+);
+)

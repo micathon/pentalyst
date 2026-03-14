@@ -1,0 +1,23 @@
+do (
+gdefun do (
+  p;
+);
+defun (p) (var x y) do (
+  try do (
+    println "p: try blk";
+  )
+  except y as x do (
+    println "p: y =" y;
+  )
+  eotry do (
+    println "p: eotry";
+  )
+  println "p: post eotry";
+  {#
+  except a as b do (
+    println "p: y =" y;
+  );
+  #}
+  println "p: btm";
+);
+)
