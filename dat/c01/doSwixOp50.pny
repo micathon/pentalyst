@@ -1,0 +1,10 @@
+do (
+gdefun do (
+  p 1;
+);
+defun (p x) (var y z) do (
+  set y (swix x (case 0 1)
+    else z 0);
+  );
+);
+)
