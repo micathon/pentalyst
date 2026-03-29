@@ -144,4 +144,43 @@ public class SynChkTopTest {
 		doGlbDefStmt(50);
 	}
 
+	private void doDefunStmt(int errno) {
+		handleStmt("doDefunStmt", 100, errno);
+	}
+	
+	@Test
+	public void doDefunStmt10() {
+		doDefunStmt(10);
+	}
+
+	@Test
+	public void doDefunStmt20() {
+		doDefunStmt(20);
+	}
+
+	@Test
+	public void doDefunStmt30() {
+		doDefunStmt(30);
+	}
+
+	@Test
+	public void doDefunStmt40() {
+		doDefunStmt(40);
+	}
+/*
+	@Test
+	public void doDefunStmt50() {
+		doDefunStmt(50);
+	}
+
+	@Test
+	public void doDefunStmt60() {
+		doDefunStmt(60);
+	}
+
+	@Test
+	public void doDefunStmt80() {
+		doDefunStmt(80);
+	}
+*/
 }
