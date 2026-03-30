@@ -183,4 +183,67 @@ public class SynChkTopTest {
 		doDefunStmt(80);
 	}
 */
+	private void doAbDefunStmt(int errno) {
+		handleStmt("doAbDefunStmt", 110, errno);
+	}
+	
+	@Test
+	public void doAbDefunStmt10() {
+		doAbDefunStmt(10);
+	}
+
+	@Test
+	public void doAbDefunStmt20() {
+		doAbDefunStmt(20);
+	}
+
+	@Test
+	public void doAbDefunStmt30() {
+		doAbDefunStmt(30);
+	}
+
+	@Test
+	public void doAbDefunStmt40() {
+		doAbDefunStmt(40);
+	}
+/*
+	@Test
+	public void doAbDefunStmt50() {
+		doAbDefunStmt(50);
+	}
+
+	@Test
+	public void doAbDefunStmt60() {
+		doAbDefunStmt(60);
+	}
+
+	@Test
+	public void doAbDefunStmt70() {
+		doAbDefunStmt(70);
+	}
+*/
+	private void doDecorList(int errno) {
+		handleStmt("doDecorList", 120, errno);
+	}
+	
+	@Test
+	public void doDecorList10() {
+		doDecorList(10);
+	}
+
+	@Test
+	public void doDecorList20() {
+		doDecorList(20);
+	}
+
+	@Test
+	public void doDecorList30() {
+		doDecorList(30);
+	}
+
+	@Test
+	public void doDecorList40() {
+		doDecorList(40);
+	}
+
 }
