@@ -246,4 +246,28 @@ public class SynChkTopTest {
 		doDecorList(40);
 	}
 
+	private void doDotCall(int errno) {
+		handleStmt("doDotCall", 140, errno);
+	}
+	
+	@Test
+	public void doDotCall10() {
+		doDotCall(10);
+	}
+
+	@Test
+	public void doDotCall20() {
+		doDotCall(20);
+	}
+
+	@Test
+	public void doDotCall30() {
+		doDotCall(30);
+	}
+
+	@Test
+	public void doDotCall40() {
+		doDotCall(40);
+	}
+
 }
