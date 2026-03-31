@@ -270,4 +270,28 @@ public class SynChkTopTest {
 		doDotCall(40);
 	}
 
+	private void doParmList(int errno) {
+		handleStmt("doParmList", 150, errno);
+	}
+	
+	@Test
+	public void doParmList10() {
+		doParmList(10);
+	}
+
+	@Test
+	public void doParmList20() {
+		doParmList(20);
+	}
+
+	@Test
+	public void doParmList30() {
+		doParmList(30);
+	}
+
+	@Test
+	public void doParmList40() {
+		doParmList(40);
+	}
+
 }
