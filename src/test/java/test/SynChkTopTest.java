@@ -294,4 +294,67 @@ public class SynChkTopTest {
 		doParmList(40);
 	}
 
+	private void doDefParm(int errno) {
+		handleStmt("doDefParm", 170, errno);
+	}
+	
+	@Test
+	public void doDefParm10() {
+		doDefParm(10);
+	}
+
+	@Test
+	public void doDefParm20() {
+		doDefParm(20);
+	}
+
+	private void doClassStmt(int errno) {
+		handleStmt("doClassStmt", 240, errno);
+	}
+	
+	@Test
+	public void doClassStmt10() {
+		doClassStmt(10);
+	}
+
+	@Test
+	public void doClassStmt20() {
+		doClassStmt(20);
+	}
+
+	@Test
+	public void doClassStmt30() {
+		doClassStmt(30);
+	}
+
+	@Test
+	public void doClassStmt35() {
+		doClassStmt(35);
+	}
+
+	@Test
+	public void doClassStmt40() {
+		doClassStmt(40);
+	}
+/*
+	@Test
+	public void doClassStmt50() {
+		doClassStmt(50);
+	}
+
+	@Test
+	public void doClassStmt55() {
+		doClassStmt(55);
+	}
+*/
+	@Test
+	public void doClassStmt60() {
+		doClassStmt(60);
+	}
+/*
+	@Test
+	public void doClassStmt70() {
+		doClassStmt(70);
+	}
+*/
 }
