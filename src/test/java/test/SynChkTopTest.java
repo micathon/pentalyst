@@ -357,4 +357,147 @@ public class SynChkTopTest {
 		doClassStmt(70);
 	}
 */
+	private void doHedronStmt(int errno) {
+		handleStmt("doHedronStmt", 260, errno);
+	}
+	
+	@Test
+	public void doHedronStmt10() {
+		doHedronStmt(10);
+	}
+/*
+	@Test
+	public void doHedronStmt20() {
+		doHedronStmt(20);
+	}
+
+	@Test
+	public void doHedronStmt25() {
+		doHedronStmt(25);
+	}
+
+	@Test
+	public void doHedronStmt40() {
+		doHedronStmt(40);
+	}
+
+	@Test
+	public void doHedronStmt50() {
+		doHedronStmt(50);
+	}
+*/
+	private void doConstList(int errno) {
+		handleStmt("doConstList", 280, errno);
+	}
+/*	
+	@Test
+	public void doConstList10() {
+		doConstList(10);
+	}
+
+	@Test
+	public void doConstList30() {
+		doConstList(30);
+	}
+
+	@Test
+	public void doConstList20() {
+		doConstList(20);
+	}
+*/
+	private void doEnumStmt(int errno) {
+		handleStmt("doEnumStmt", 300, errno);
+	}
+	
+	@Test
+	public void doEnumStmt10() {
+		doEnumStmt(10);
+	}
+
+	@Test
+	public void doEnumStmt20() {
+		doEnumStmt(20);
+	}
+
+	@Test
+	public void doEnumStmt30() {
+		doEnumStmt(30);
+	}
+
+	@Test
+	public void doEnumStmt40() {
+		doEnumStmt(40);
+	}
+
+	private void doEnumPair(int errno) {
+		handleStmt("doEnumPair", 320, errno);
+	}
+	
+	@Test
+	public void doEnumPair10() {
+		doEnumPair(10);
+	}
+
+	@Test
+	public void doEnumPair20() {
+		doEnumPair(20);
+	}
+
+	@Test
+	public void doEnumPair30() {
+		doEnumPair(30);
+	}
+
+	@Test
+	public void doEnumPair40() {
+		doEnumPair(40);
+	}
+/*
+	@Test
+	public void doEnumPair50() {
+		doEnumPair(50);
+	}
+
+	@Test
+	public void doEnumPair60() {
+		doEnumPair(60);
+	}
+*/
+	private void doDoesList(int errno) {
+		handleStmt("doDoesList", 400, errno);
+	}
+/*	
+	@Test
+	public void doDoesList10() {
+		doDoesList(10);
+	}
+*/
+	private void doDoDefBlock(int errno) {
+		handleStmt("doDoDefBlock", 410, errno);
+	}
+	
+	@Test
+	public void doDoDefBlock20() {
+		doDoDefBlock(20);
+	}
+
+	@Test
+	public void doDoDefBlock30() {
+		doDoDefBlock(30);
+	}
+
+	@Test
+	public void doDoDefBlock40() {
+		doDoDefBlock(40);
+	}
+
+	private void doHedronDoBlock(int errno) {
+		handleStmt("doHedronDoBlock", 420, errno);
+	}
+/*	
+	@Test
+	public void doHedronDoBlock20() {
+		doHedronDoBlock(20);
+	}
+*/
 }
