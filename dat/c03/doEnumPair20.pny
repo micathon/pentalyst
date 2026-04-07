@@ -1,0 +1,6 @@
+do (
+gdefun do (
+  #p 1;
+);
+enum e (:);
+)

@@ -1,0 +1,12 @@
+do (
+gdefun do (
+  #p 1;
+);
+#hedron h (const (cval 0))(does g) do (
+hedron (does g) do (
+defimp (p x)(var y) do (
+  set y x;
+  println "p: y =" y;
+);
+);
+)

@@ -1,0 +1,8 @@
+do (
+class c do (
+defun (p x)(+) do (
+  set y x;
+  println "p: y =" y;
+);
+);
+)
