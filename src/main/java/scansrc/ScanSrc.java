@@ -198,7 +198,7 @@ public class ScanSrc implements IConst {
 			if (!inCmtBlk) { 
 				if (inStrLit) { }
 				else if (ch == CLOSEBRACECH) {
-					putErr(TokenTyp.ERRCLOSEBRACE);
+					putErrNo(TokenTyp.ERRCLOSEBRACE, 10);
 					incTokCount(TokenTyp.ERRCLOSEBRACE);
 					ch = sp;
 					continue;
@@ -1804,14 +1804,28 @@ public class ScanSrc implements IConst {
 	}
 
 	private String putColErr(TokenTyp toktyp, int colIdx) {
-		return putFullErr(toktyp, colIdx, "");
+		return putFullErr(toktyp, colIdx, "", 0);
 	}
 
 	private String putTokErr(TokenTyp toktyp, String token) {
-		return putFullErr(toktyp, 0, token);
+		return putFullErr(toktyp, 0, token, 0);
 	}
 
-	private String putFullErr(TokenTyp toktyp, int colIdx, String token) {
+	public String putErrNo(TokenTyp toktyp, int errno) {
+		return putColErrNo(toktyp, 0, errno);
+	}
+
+	private String putColErrNo(TokenTyp toktyp, int colIdx, int errno) {
+		return putFullErr(toktyp, colIdx, "", errno);
+	}
+
+	private String putTokErrNo(TokenTyp toktyp, String token, int errno) {
+		return putFullErr(toktyp, 0, token, errno);
+	}
+
+	private String putFullErr(TokenTyp toktyp, int colIdx, String token,
+		int errno) 
+	{
 		String outbuf, msg;
 		String colStr = "";
 		char sp = ' ';
@@ -1827,6 +1841,7 @@ public class ScanSrc implements IConst {
 		else if (token.length() > 0) {
 			colStr = ", token: " + token;
 		}
+		cfg.trapSrcError(errno);
 		msg = getTokErrStr(toktyp);
 		outbuf = TABSTR + "ERR" + sp + toktyp + sp + msg + colStr;
 		omsg("");
