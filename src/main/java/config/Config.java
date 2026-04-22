@@ -33,8 +33,10 @@ public class Config implements IConst {
 	//private char xchar = 'x';
 	private char pchar = 'p';
 	private boolean isErrTrapped;
+	private boolean fileNotFound;
 	private int modno;
 	private int moderrno;
+	private int srcerrno;
 
 	public Config(String filePath, String sepWord, String outFileName) {
 		Path fPath; 
@@ -145,6 +147,8 @@ public class Config implements IConst {
 		isErrTrapped = false;
 		modno = 0;
 		moderrno = 0;
+		srcerrno = 0;
+		setErrFileNotFound(false);
 	}
 	
 	private String getSepWord() {
@@ -216,6 +220,10 @@ public class Config implements IConst {
 		return moderrno;
 	}
 	
+	public int getSrcErrNo() {
+		return srcerrno;
+	}
+	
 	public boolean getErrTrapped() {
 		return isErrTrapped;
 	}
@@ -254,6 +262,26 @@ public class Config implements IConst {
 	public void cancelError() {
 		modno = 0;
 		moderrno = 0;
+	}
+	
+	public void setSrcErrNo(int errno) {
+		srcerrno = errno;
+	}
+	
+	public void trapSrcError(int errno) {
+		setSrcErrNo(errno);
+	}
+	
+	public boolean getErrFileNotFound() {
+		return fileNotFound;
+	}
+	
+	public void setErrFileNotFound(boolean flag) {
+		fileNotFound = flag;
+	}
+	
+	public void trapErrFileNotFound() {
+		setErrFileNotFound(true);
 	}
 	
 	public void omsg(String msg) {  
