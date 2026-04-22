@@ -18,9 +18,6 @@ public class ScanSrcTest {
 		Config cfg;
 		
 		cfg = new Config();
-		cfg.setSrcErrNo(errno);
-		fileName += errno;
-		fileName += ".pny";
 		filePath = System.getenv("PNY_HOME");
 		fileMidPath = "/dat/" + modstr;
 		filePath = filePath + fileMidPath;
@@ -33,7 +30,13 @@ public class ScanSrcTest {
 		int srcerrno;
 		Config cfg;
 
+		fileName += errno;
+		fileName += ".pny";
 		cfg = runTest(fileName, errno);
+		if (cfg.getErrFileNotFound()) {
+			assertEquals(fileName, "");
+			return;
+		}
 		srcerrno = cfg.getSrcErrNo();
 		assertEquals(srcerrno, errno);
 	}
