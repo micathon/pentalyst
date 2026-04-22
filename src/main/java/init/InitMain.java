@@ -171,6 +171,7 @@ public class InitMain implements IConst {
 			}
 		} catch (IOException exc) {
 			System.out.println("I/O Error: " + exc);
+			cfg.trapErrFileNotFound();
 		}
 		return rtnval;
 	}
