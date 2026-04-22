@@ -29,8 +29,6 @@ public class SynChkCommonTest {
 		errval /= 100.0;
 		cfg.setModNo(modno);
 		cfg.setModErrNo(errval);
-		fileName += suffixNo;
-		fileName += ".pny";
 		filePath = System.getenv("PNY_HOME");
 		fileMidPath = "/dat/" + modstr;
 		filePath = filePath + fileMidPath;
@@ -50,10 +48,28 @@ public class SynChkCommonTest {
 		int moderrno;
 		Config cfg;
 
+		fileName += addLeadingZero(suffixNo);
+		fileName += ".pny";
 		cfg = runTest(fileName, miderrno, errno, suffixNo);
+		if (cfg.getErrFileNotFound()) {
+			assertEquals(fileName, "");
+			return;
+		}
 		moderrno = cfg.getModErrNo();
 		fullerrno = cfg.getFullErrNo(modno, moderrno);
 		assertEquals(fullerrno, (modno * 100000) + (miderrno * 100) + errno);
+	}
+	
+	private String addLeadingZero(int suffixNo) {
+		String s;
+		if (suffixNo == 0) {
+			return "00";
+		}
+		s = "" + suffixNo;
+		if (s.length() < 2) {
+			s = "0" + s;
+		}
+		return s;
 	}
 	
 }
