@@ -50,4 +50,29 @@ public class ScanSrcTest {
 		doCodeBuf(10);
 	}
 	
+	@Test
+	public void doCodeBuf20() {
+		doCodeBuf(20);
+	}
+	
+	@Test
+	public void doCodeBuf30() {
+		doCodeBuf(30);
+	}
+	
+	@Test
+	public void doCodeBuf40() {
+		doCodeBuf(40);
+	}
+	
+	@Test
+	public void doCodeBuf50() {
+		doCodeBuf(50);
+	}
+	
+	@Test
+	public void doCodeBuf60() {
+		doCodeBuf(60);
+	}
+	
 }
