@@ -32,7 +32,7 @@ public class ScanSrc implements IConst {
 	private static final int BIFBYTNO = 1;
 	private static final int SYSBYTNO = 2;
 	private static final String TABSTR = "     "; // 5 blanks
-	private static final String ERRSYMBUF = "[]'`,@";
+	private static final String ERRSYMBUF = "[]'`,";
 	private static final String UNITENDBUF = "@";
 	private static final char CMTLINECH = '#';
 	private static final char OPENBRACECH = '{';
@@ -143,6 +143,7 @@ public class ScanSrc implements IConst {
 		int colIdx = 0;
 		int rtnval;
 		int bufLen;
+		boolean isUncheckedChar;
 		boolean wasBackslash;
 		boolean wasWhiteSp, inWhiteSp;
 		boolean wasCmtHalf;
@@ -195,6 +196,7 @@ public class ScanSrc implements IConst {
 			colIdx++;
 			colCount = colIdx;
 			ch = inbuf.charAt(i);
+			isUncheckedChar = false;
 			if (!inCmtBlk) { 
 				if (inStrLit) { }
 				else if (ch == CLOSEBRACECH) {
@@ -283,23 +285,34 @@ public class ScanSrc implements IConst {
 					//   \<cr> in str. lit.
 					isAllWhiteSp = false;
 					strLitBuf = "";
-					putErr(TokenTyp.ERRMULTISTRLITBADCHAR);
+					putErrNo(TokenTyp.ERRMULTISTRLITBADCHAR, 20);
 					incTokCount(TokenTyp.ERRMULTISTRLITBADCHAR);
 				}
 				token = "" + ch;  // first char. in token
-				continue;
+				isUncheckedChar = true;
 			}
 			// !wasWhiteSp || inWhiteSp...
 			else if (!inWhiteSp) {
 				// !wasWhiteSp
 				token += ch;  // middle char. in token
-				continue;
+				isUncheckedChar = true;
 			}
 			else if (!wasWhiteSp) {
 				// handle token, (inWhiteSp && !wasWhiteSp)
 				omsg("main loop: doToken = " + token);
 				doToken(token);
 				token = "";
+			}
+			if (isUncheckedChar) {
+				if (errstr.indexOf(ch) >= 0) {
+					// ch is an invalid char.
+					rtnval = getNegErrCode(TokenTyp.ERRSYM);
+					putColErrNo(TokenTyp.ERRSYM, colIdx, 50);
+					incTokCount(TokenTyp.ERRSYM);
+					inWhiteSp = true;
+					fatalRtnCode = rtnval;
+				}
+				continue;
 			}
 			// inWhiteSp...
 			
@@ -332,7 +345,7 @@ public class ScanSrc implements IConst {
 			}
 			else if (wasCmtHalf) {
 				// error: {{
-				putErr(TokenTyp.ERROPENBRACE);
+				putErrNo(TokenTyp.ERROPENBRACE, 30);
 				incTokCount(TokenTyp.ERROPENBRACE);
 				isCmtHalf = false;
 				continue;
@@ -343,7 +356,7 @@ public class ScanSrc implements IConst {
 			}
 			if (wasCmtHalf) {
 				// error: { not followed by #
-				putErr(TokenTyp.ERROPENBRACE);
+				putErrNo(TokenTyp.ERROPENBRACE, 40);
 				incTokCount(TokenTyp.ERROPENBRACE);
 				isCmtHalf = false;
 				continue;
@@ -373,13 +386,6 @@ public class ScanSrc implements IConst {
 				incTokCount(TokenTyp.SEMICOLON);
 				outStructTok(ch);
 			}
-			else if (errstr.indexOf(ch) >= 0) {
-				// ch is an invalid char.
-				rtnval = 0;
-				putColErr(TokenTyp.ERRSYM, colIdx);
-				incTokCount(TokenTyp.ERRSYM);
-				inWhiteSp = true;
-			}
 			if (rtnval < 0) {
 				putRtnCodeErr(rtnval);
 			}
@@ -387,7 +393,7 @@ public class ScanSrc implements IConst {
 		// end for loop, end of scanning inbuf
 		if (inStrLit) {
 			if (!isAllWhiteSp) {
-				putErr(TokenTyp.ERRCLOSEQUOTE);
+				putErrNo(TokenTyp.ERRCLOSEQUOTE, 60);
 				incTokCount(TokenTyp.ERRCLOSEQUOTE);
 			}
 			inStrLit = false;
@@ -536,7 +542,7 @@ public class ScanSrc implements IConst {
 	}
 	
 	public void oprn(String msg) {
-		System.out.println(msg);  //##
+		System.out.println(msg);  
 	}
 	
 	public void outdebug(String msg) {  
