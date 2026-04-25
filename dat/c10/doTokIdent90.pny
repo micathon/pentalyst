@@ -1,0 +1,9 @@
+do (
+gdefun do (
+  p 1;
+);
+defun (p x)(var yc) do (
+  set yc  ___x;
+  println "p: y =" yc;
+);
+)
