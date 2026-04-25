@@ -284,6 +284,10 @@ public class Config implements IConst {
 		setErrFileNotFound(true);
 	}
 	
+	public void oprn(String msg) {  
+		System.out.println(msg);
+	}
+	
 	public void omsg(String msg) {  
 		if (idebug == 1) {
 			omsgbuf += msg;
