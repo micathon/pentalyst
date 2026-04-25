@@ -674,7 +674,11 @@ public class ScanSrc implements IConst {
 	}
 	
 	public boolean isEmptyProg() {
-		return !tokFound;
+		boolean isEmpty = !tokFound;
+		if (isEmpty) {
+			cfg.trapSrcError(70);
+		}
+		return isEmpty;
 	}
 	
 	// all lower case letters
@@ -706,7 +710,7 @@ public class ScanSrc implements IConst {
 			}
 		}
 		if (!valid || !Character.isLetter(ch)) {
-			putTokErr(TokenTyp.ERRIDENTIFIER, token);
+			putTokErrNo(TokenTyp.ERRIDENTIFIER, token, 80);
 			return toktyp;
 		}
 		if (i == 2) {
@@ -716,7 +720,7 @@ public class ScanSrc implements IConst {
 			return getValidTokId(token);
 		}
 		if (i > 2) {
-			putTokErr(TokenTyp.ERRIDOVERSLASH, token);
+			putTokErrNo(TokenTyp.ERRIDOVERSLASH, token, 90);
 			return toktyp;
 		}
 		// i = 0
@@ -745,6 +749,7 @@ public class ScanSrc implements IConst {
 			isKeyword = false;
 		}
 		if (isKeyword && startsWithZed) { 
+			cfg.trapSrcError(100);
 			toktyp = TokenTyp.ERRZKEYWD;
 			rtnCode = getNegErrCode(toktyp);
 		}
@@ -1847,7 +1852,9 @@ public class ScanSrc implements IConst {
 		else if (token.length() > 0) {
 			colStr = ", token: " + token;
 		}
-		cfg.trapSrcError(errno);
+		if (errno > 0) {
+			cfg.trapSrcError(errno);
+		}
 		msg = getTokErrStr(toktyp);
 		outbuf = TABSTR + "ERR" + sp + toktyp + sp + msg + colStr;
 		omsg("");
