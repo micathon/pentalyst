@@ -75,4 +75,36 @@ public class ScanSrcTest {
 		doCodeBuf(60);
 	}
 	
+	private void doEmptyProg(int errno) {
+		handleStmt("doEmptyProg", errno);
+	}
+
+	@Test
+	public void doEmptyProg70() {
+		doEmptyProg(70);
+	}
+	
+	private void doTokIdent(int errno) {
+		handleStmt("doTokIdent", errno);
+	}
+
+	@Test
+	public void doTokIdent80() {
+		doTokIdent(80);
+	}
+	
+	@Test
+	public void doTokIdent90() {
+		doTokIdent(90);
+	}
+	
+	private void doTokLower(int errno) {
+		handleStmt("doTokLower", errno);
+	}
+
+	@Test
+	public void doTokLower100() {
+		doTokLower(100);
+	}
+	
 }
