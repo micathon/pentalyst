@@ -166,6 +166,10 @@ public class InitMain implements IConst {
 			if (isUnitTest) {
 				rtnval = synchk.showUnitTestVal();
 			}
+			else if (scanSrc.isEmptyProg()) {
+				// scanned source file of entirely white space
+				rtnval = true;
+			}
 			else if (scanSrc.scanSummary(fatalErr)) {
 				rscan.run(0);
 			}
