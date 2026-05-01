@@ -107,4 +107,55 @@ public class ScanSrcTest {
 		doTokLower(100);
 	}
 	
+	private void doValidTokId(int errno) {
+		handleStmt("doValidTokId", errno);
+	}
+
+	@Test
+	public void doValidTokId110() {
+		doValidTokId(110);
+	}
+	
+	private void doTokSysFunc(int errno) {
+		handleStmt("doTokSysFunc", errno);
+	}
+
+	@Test
+	public void doTokSysFunc120() {
+		doTokSysFunc(120);
+	}
+	
+	private void doTokOper(int errno) {
+		handleStmt("doTokOper", errno);
+	}
+
+	@Test
+	public void doTokOper130() {
+		doTokOper(130);
+	}
+	
+	private void doTokNum(int errno) {
+		handleStmt("doTokNum", errno);
+	}
+
+	@Test
+	public void doTokNum140() {
+		doTokNum(140);
+	}
+	
+	@Test
+	public void doTokNum150() {
+		doTokNum(150);
+	}
+	
+	@Test
+	public void doTokNum160() {
+		doTokNum(160);
+	}
+	
+	@Test
+	public void doTokNum170() {
+		doTokNum(170);
+	}
+	
 }
