@@ -822,6 +822,7 @@ public class ScanSrc implements IConst {
 			}
 			return TokenTyp.IDENTIFIER;
 		}
+		cfg.trapSrcError(110);
 		putTokErr(TokenTyp.ERRIDENTIFIER, token);
 		return TokenTyp.ERRIDENTIFIER;
 	}
@@ -831,6 +832,7 @@ public class ScanSrc implements IConst {
 			putSys(token);
 			return TokenTyp.SYSFUNC;
 		}
+		cfg.trapSrcError(120);
 		putTokErr(TokenTyp.ERRSYSFUNC, token);
 		return TokenTyp.ERRIDENTIFIER;
 	}
@@ -862,6 +864,7 @@ public class ScanSrc implements IConst {
 
 		if (kwtyp == KeywordTyp.NULL) {
 			omsg("kwtyp is null!");
+			cfg.trapSrcError(130);
 			putTokErr(TokenTyp.ERROP, token);
 			return TokenTyp.ERROP;
 		}
@@ -909,6 +912,7 @@ public class ScanSrc implements IConst {
 				toktyp = TokenTyp.FLOAT;
 			}
 			else {
+				cfg.trapSrcError(140);
 				putTokErr(TokenTyp.ERRNUM, token);
 				toktyp = TokenTyp.ERRNUM;
 			}
@@ -927,17 +931,26 @@ public class ScanSrc implements IConst {
 				rtnval = putHex(sign + token);
 				toktyp = TokenTyp.HEXADECIMAL;
 			}
+			else {
+				cfg.trapSrcError(150);
+			}
 			break;
 		case OCTCH:
 			if (isValidNumTok(TokenTyp.OCTAL, token)) {
 				rtnval = putOct(sign + token);
 				toktyp = TokenTyp.OCTAL;
 			}
+			else {
+				cfg.trapSrcError(160);
+			}
 			break;
 		case BINCH:
 			if (isValidNumTok(TokenTyp.BINARY, token)) {
 				rtnval = putBin(sign + token);
 				toktyp = TokenTyp.BINARY;
+			}
+			else {
+				cfg.trapSrcError(170);
 			}
 			break;
 		}
