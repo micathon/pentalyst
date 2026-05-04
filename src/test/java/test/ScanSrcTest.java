@@ -158,4 +158,31 @@ public class ScanSrcTest {
 		doTokNum(170);
 	}
 	
+	private void doSimpleNode(int errno) {
+		handleStmt("doSimpleNode", errno);
+	}
+
+	@Test
+	public void doSimpleNode200() {
+		doSimpleNode(200);
+	}
+
+	private void doAddParen(int errno) {
+		handleStmt("doAddParen", errno);
+	}
+
+	@Test
+	public void doAddParen220() {
+		doAddParen(220);
+	}
+	
+	private void doCrPath(int errno) {
+		handleStmt("doCrPath", errno);
+	}
+
+	@Test
+	public void doCrPath240() {
+		doCrPath(240);
+	}
+	
 }
