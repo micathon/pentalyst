@@ -1,0 +1,9 @@
+do (
+gdefun (var x y) do (
+  set x (car y);
+  #p 1;
+);
+defun (p x)(var y z) do (
+  #
+);
+)
