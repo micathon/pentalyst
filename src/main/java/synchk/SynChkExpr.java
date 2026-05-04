@@ -1148,9 +1148,11 @@ public class SynChkExpr {
 		switch (biftyp) {
 		case CRPATH:
 			return doCrPath(rightp);
-		case CAR:
+		/*
+		case CAR:  // caused bug in ScanSrc.isCrPathName !!
 		case CDR:
 			return doUnaryBif(biftyp, rightp);
+		*/
 		case RPLACA:
 		case RPLACD:
 			return doBinaryBif(biftyp, rightp);
