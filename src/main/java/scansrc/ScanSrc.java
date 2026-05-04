@@ -1346,6 +1346,7 @@ public class ScanSrc implements IConst {
 		if (wasdo) {
 			// do keyword must be followed by (
 			wasdo = false;
+			cfg.trapSrcError(200);
 			return getNegErrCode(TokenTyp.ERRDOMISSINGBLK);
 		}
 		page = store.getPage(currNodep);
@@ -1473,6 +1474,9 @@ public class ScanSrc implements IConst {
 		if (celltyp == NodeCellTyp.ID) {  // (func x y z)
 			varName = store.getVarName(downp);
 			omsg("( varname = " + varName);
+			if (varName.equals("cdr")) {
+				oprn(">>> isCrPathName: name = [" + varName + "]");
+			}
 			if (isCrPathName(varName)) {  // func = car/cdr/caar/cadr/...
 				return genCrPathCall(varName, downp, rightp);
 			}
@@ -1666,6 +1670,7 @@ public class ScanSrc implements IConst {
 		
 	private int doAddParenRtn(boolean isSemicln) {
 		if (wasparen) {
+			cfg.trapSrcError(220);
 			return getNegErrCode(TokenTyp.ERRPARENRPT);
 		}
 		wasparen = true;
@@ -1765,24 +1770,31 @@ public class ScanSrc implements IConst {
 		// name = car/cdr/caar/cadr/...
 		int i, len;
 		char c;
+		boolean rtnval = true;
 		
 		len = name.length();
-		if (len < 4) {
-			return false;
+		if (len < 3) {
+			rtnval = false;
 		}
-		if (name.charAt(0) != 'c') {
-			return false;
+		else if (name.charAt(0) != 'c') {
+			rtnval = false;
 		}
-		if (name.charAt(len - 1) != 'r') {
-			return false;
+		else if (name.charAt(len - 1) != 'r') {
+			rtnval = false;
 		}
-		for (i = 1; i < len - 1; i++) {
-			c = name.charAt(i);
-			if ((c != 'a') && (c != 'd')) {
-				return false;
+		else {
+			for (i = 1; i < len - 1; i++) {
+				c = name.charAt(i);
+				if ((c != 'a') && (c != 'd')) {
+					rtnval = false;
+					break;
+				}
 			}
 		}
-		return true;
+		if (rtnval) {
+			cfg.trapSrcError(240);
+		}
+		return rtnval;
 	}
 	
 	public int getCrPathVal(String name) {
