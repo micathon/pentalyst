@@ -268,8 +268,17 @@ public class Config implements IConst {
 		srcerrno = errno;
 	}
 	
+	public void setModSrcErr(int modno, int errno) {
+		this.modno = modno;
+		srcerrno = errno;
+	}
+	
 	public void trapSrcError(int errno) {
-		setSrcErrNo(errno);
+		setModSrcErr(10, errno);
+	}
+	
+	public void trapRScanError(int errno) {
+		setModSrcErr(11, errno);
 	}
 	
 	public boolean getErrFileNotFound() {
