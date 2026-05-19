@@ -258,6 +258,7 @@ public class RunScanner implements IConst, RunConst {
 					rightq = scanClassStmt(rightp, kwtyp);
 					break;
 				default:
+					//cfg.trapRScanError(100);
 					rightq = -1;
 				}
 				if (rightq > 0) {
