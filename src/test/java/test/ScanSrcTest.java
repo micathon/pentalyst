@@ -9,36 +9,9 @@ import org.junit.Test;
 
 public class ScanSrcTest {
 
-	private String modstr = "c10/";
-	
-	private Config runTest(String fileName, int errno) {
-		String filePath;
-		String fileMidPath;
-		InitMain initobj;
-		Config cfg;
-		
-		cfg = new Config();
-		filePath = System.getenv("PNY_HOME");
-		fileMidPath = "/dat/" + modstr;
-		filePath = filePath + fileMidPath;
-		initobj = new InitMain(cfg);
-		initobj.runInitFile(filePath, fileName);
-		return cfg;
-	}
-	
 	public void handleStmt(String fileName, int errno) {
-		int srcerrno;
-		Config cfg;
-
-		fileName += errno;
-		fileName += ".pny";
-		cfg = runTest(fileName, errno);
-		if (cfg.getErrFileNotFound()) {
-			assertEquals(fileName, "");
-			return;
-		}
-		srcerrno = cfg.getSrcErrNo();
-		assertEquals(srcerrno, errno);
+		GeneralCommonTest common = new GeneralCommonTest(10); 
+		common.handleStmt(fileName, errno);
 	}
 	
 	private void doCodeBuf(int errno) {
