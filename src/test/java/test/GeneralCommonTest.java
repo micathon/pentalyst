@@ -36,6 +36,7 @@ public class GeneralCommonTest {
 	
 	public void handleStmt(String fileName, int errno) {
 		int srcerrno;
+		int fullerrno;
 		Config cfg;
 
 		fileName += errno;
@@ -46,7 +47,8 @@ public class GeneralCommonTest {
 			return;
 		}
 		srcerrno = cfg.getSrcErrNo();
-		assertEquals(srcerrno, errno);
+		fullerrno = cfg.getMillErrNo(modno, srcerrno);
+		assertEquals(fullerrno, (modno * 1000) + errno);
 	}
 	
 }
