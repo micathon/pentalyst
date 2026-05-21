@@ -242,6 +242,10 @@ public class Config implements IConst {
 		return moderrno + (100000 * modno);
 	}
 	
+	public int getMillErrNo(int modno, int errno) {
+		return errno + (1000 * modno);
+	}
+	
 	public void trapError(int modno, double errval) {
 		long miderrno;
 		
