@@ -258,7 +258,6 @@ public class RunScanner implements IConst, RunConst {
 					rightq = scanClassStmt(rightp, kwtyp);
 					break;
 				default:
-					//cfg.trapRScanError(100);
 					rightq = -1;
 				}
 				if (rightq > 0) {
@@ -1116,6 +1115,7 @@ public class RunScanner implements IConst, RunConst {
 			// check if varidx not in gvar list...
 			if (isTgt && !gvarList.contains(varidx)) {
 				// error: attempt to modify unlisted glbvar
+				cfg.trapRScanError(100);
 				lastErrCode = BADGVAR;
 				lastRightp = rightp;
 				return false;
