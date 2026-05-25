@@ -1288,6 +1288,7 @@ public class RunScanner implements IConst, RunConst {
 		rt.glbLocVarList.add(-1);
 		if (kwtyp != KeywordTyp.DO) {
 			omsg("Missing DO");
+			//cfg.trapRScanError(150);
 			return -1;
 		}
 		if (node.getRightp() > 0) {
