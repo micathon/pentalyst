@@ -4,6 +4,7 @@ import iconst.IConst;
 import iconst.KeywordTyp;
 import iconst.PageTyp;
 import iconst.RunConst;
+import config.Config;
 import page.AddrNode;
 import page.Page;
 import page.Store;
@@ -13,11 +14,15 @@ public class RunOperators implements IConst, RunConst {
 	private Store store;
 	private RunTime rt;
 	private RunPushPop pp;
+	private Config cfg;
 	
-	public RunOperators(Store store, RunTime rt, RunPushPop pp) {
+	public RunOperators(Store store, RunTime rt, RunPushPop pp,
+		Config cfg)
+	{
 		this.store = store;
 		this.rt = rt;
 		this.pp = pp;
+		this.cfg = cfg;
 	}
 	
 	private void omsg(String msg) {
@@ -648,6 +653,7 @@ public class RunOperators implements IConst, RunConst {
 			denom = getIntOffStk(stkidx);
 		}
 		if (denom == 0.0) {
+			cfg.trapROperError(100);
 			return ZERODIV;
 		}
 		stkidx = popIntStk();

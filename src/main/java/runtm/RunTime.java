@@ -62,7 +62,7 @@ public class RunTime implements IConst, RunConst {
 		this.synChk = synChk;
 		this.cfg = cfg;
 		pp = new RunPushPop(store, this, cfg);
-		runop = new RunOperators(store, this, pp);
+		runop = new RunOperators(store, this, pp, cfg);
 		rcall = new RunCall(store, this, pp);
 		rfc = new RunFlowCtrl(store, this, pp, runop);
 		locBaseIdx = 0;
@@ -412,6 +412,7 @@ public class RunTime implements IConst, RunConst {
 					return 0;
 				}
 				if (rightp > NEGBASEVAL) {  // error
+					cfg.trapRMainError(100);
 					return rightp;
 				}
 				// run stmt. using kwd. (encoded in -ve rightp)
