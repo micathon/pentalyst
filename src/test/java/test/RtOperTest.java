@@ -2,13 +2,13 @@ package test;
 
 import org.junit.Test;
 
-public class RtMainTest {
+public class RtOperTest {
 
 	public void handleStmt(String fileName, int errno) {
-		GeneralCommonTest common = new GeneralCommonTest(12); 
+		GeneralCommonTest common = new GeneralCommonTest(13); 
 		common.handleStmt(fileName, errno);
 	}
-	
+
 	private void doZeroDiv(int errno) {
 		handleStmt("doZeroDiv", errno);
 	}
@@ -17,5 +17,4 @@ public class RtMainTest {
 	public void doZeroDiv100() {
 		doZeroDiv(100);
 	}
-
 }

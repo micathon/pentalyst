@@ -1,10 +1,5 @@
 package test;
 
-import config.Config;
-import init.InitMain;
-
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 public class RtScanTest {
