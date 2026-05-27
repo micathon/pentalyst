@@ -285,6 +285,14 @@ public class Config implements IConst {
 		setModSrcErr(11, errno);
 	}
 	
+	public void trapRMainError(int errno) {
+		setModSrcErr(12, errno);
+	}
+	
+	public void trapROperError(int errno) {
+		setModSrcErr(13, errno);
+	}
+	
 	public boolean getErrFileNotFound() {
 		return fileNotFound;
 	}
