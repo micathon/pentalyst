@@ -17,5 +17,14 @@ public class RtMainTest {
 	public void doZeroDiv100() {
 		doZeroDiv(100);
 	}
-
+/*
+	private void doStmtInExpr(int errno) {
+		handleStmt("doStmtInExpr", errno);
+	}
+	
+	@Test
+	public void doStmtInExpr120() {
+		doStmtInExpr(120);
+	}
+*/
 }
