@@ -412,7 +412,9 @@ public class RunTime implements IConst, RunConst {
 					return 0;
 				}
 				if (rightp > NEGBASEVAL) {  // error
-					cfg.trapRMainError(100);
+					if (rightp == ZERODIV) {
+						cfg.trapRMainError(100);
+					}
 					return rightp;
 				}
 				// run stmt. using kwd. (encoded in -ve rightp)
@@ -540,6 +542,7 @@ public class RunTime implements IConst, RunConst {
 			kwtyp = node.getKeywordTyp();
 			omsg("exprtok: btm kwtyp = " + kwtyp + ", rightp = " + rightp);
 			if (kwtyp == KeywordTyp.ZSTMT) {
+				//cfg.trapRMainError(120);
 				return STMTINEXPR;
 			}
 			oldLocDepth = locDepth;
