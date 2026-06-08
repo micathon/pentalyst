@@ -368,6 +368,7 @@ public class RunTime implements IConst, RunConst {
 		case BADBRKSTMT: return "Error in break or continue stmt";
 		case FNCALLNORTNVAL : return "Function call has no return value";
 		case GENERR: return "General runtime error";
+		//case BADUTERR: return "Unit test failure";
 		default: return "Error code = " + (-rightp);
 		}
 	}
@@ -1051,7 +1052,60 @@ public class RunTime implements IConst, RunConst {
 			return BADOP;
 		}
 		rightp = node.getRightp();
-		return rightp;
+		// note: fn call can be disabled using global srch/repl
+		return uterrpushx(200, kwtyp,
+			rightp );//uterr
+	}
+	
+	private int uterrpushx(int errno, KeywordTyp kwtyp, int rtnval) {
+		Node node;
+		NodeCellTyp celltyp;
+		
+		if (!cfg.isRMainMod() || (errno != cfg.getSrcErrNo())) {
+			return rtnval;
+		}
+		switch (kwtyp) {
+		case ADD:
+		case MPY:
+		case XOR:
+		case ANDBITZ:
+		case ORBITZ:
+		case XORBITZ:
+		case MINUS:
+		case DIV:
+		case IDIV:
+		case MOD:
+		case SHL:
+		case SHR:
+		case SHRU:
+		case EQ:
+		case NE:
+		case LT:
+		case LE:
+		case GE:
+		case GT:
+		case NOT:
+		case NOTBITZ:
+		case AND:
+		case OR:
+			break; // case count = 23 = UTPUSHXCOUNT
+		default:
+			return rtnval;
+		}
+		if (rtnval <= 0) {
+			//oprn("uterrpushx: (1) kwtyp = " + kwtyp);
+			cfg.setUtErr(true);
+			return rtnval;
+		}
+		node = store.getNode(rtnval);
+		celltyp = node.getDownCellTyp();
+		if (celltyp != NodeCellTyp.LOCVAR) {
+			//oprn("uterrpushx: kwtyp = " + kwtyp + ", celltyp = " + celltyp);
+			cfg.setUtErr(true);
+			return rtnval;
+		}
+		cfg.incKwdCount();
+		return rtnval;
 	}
 	
 	private int pushSetStmt(Node node, KeywordTyp kwtyp) {
