@@ -14,6 +14,11 @@ public class RtMainTest {
 		common.doPushExpr(fileName, errno);
 	}
 	
+	private void handlePushStmt(String fileName, int errno) {
+		GeneralCommonTest common = new GeneralCommonTest(12); 
+		common.doPushStmt(fileName, errno);
+	}
+	
 	private void doPushExpr(int errno) {
 		handlePushExpr("doPushExpr", errno);
 	}
@@ -21,6 +26,25 @@ public class RtMainTest {
 	@Test
 	public void doPushExpr200() {
 		doPushExpr(200);
+	}
+	
+	private void doPushStmt(int errno) {
+		handlePushStmt("doPushStmt", errno);
+	}
+
+	@Test
+	public void doPushStmt210() {
+		doPushStmt(210);
+	}
+	
+	@Test
+	public void doPushStmt220() {
+		doPushStmt(220);
+	}
+	
+	@Test
+	public void doPushStmt230() {
+		doPushStmt(230);
 	}
 	
 	private void doZeroDiv(int errno) {

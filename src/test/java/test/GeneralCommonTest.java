@@ -36,7 +36,10 @@ public class GeneralCommonTest implements RunConst {
 		cfg.setRunSuccess(success);
 	}
 	
-	private boolean doRunTest(String fileName, int errno) {
+	private boolean doRunTest(String fileName, int errno, boolean setvars) {
+		if (setvars) {
+			cfg.setModSrcErr(modno, errno);
+		}
 		fileName = appendErrNo(fileName, errno);
 		runTest(fileName, modno, errno);
 		if (cfg.getErrFileNotFound()) {
@@ -50,7 +53,7 @@ public class GeneralCommonTest implements RunConst {
 		int srcerrno;
 		int fullerrno;
 
-		if(!doRunTest(fileName, errno)) {
+		if(!doRunTest(fileName, errno, false)) {
 			return;
 		}
 		srcerrno = cfg.getSrcErrNo();
@@ -67,19 +70,30 @@ public class GeneralCommonTest implements RunConst {
 	public void doPushExpr(String fileName, int errno) {
 		boolean runOK;
 
-		cfg.setModSrcErr(modno, errno);
-		if(!doRunTest(fileName, errno)) {
+		if(!doRunTest(fileName, errno, true)) {
 			return;
 		}
-		/*
-		oprn("doPushExpr: success = " + cfg.getRunSuccess());
-		oprn("doPushExpr: isUtErr = " + cfg.getUtErr());
-		oprn("doPushExpr: kwdcount = " + cfg.getKwdCount());
-		*/
 		runOK = cfg.getRunSuccess() && !cfg.getUtErr();
 		assertTrue(runOK);
 		assertEquals(cfg.getKwdCount(), UTPUSHXCOUNT);
 	}
+
+	public void doPushStmt(String fileName, int errno) {
+		boolean runOK;
+
+		cfg.setUtErr(true);
+		if(!doRunTest(fileName, errno, true)) {
+			return;
+		}
+		runOK = cfg.getRunSuccess() && !cfg.getUtErr();
+		assertTrue(runOK);
+	}
+
+	/*
+	oprn("doPushExpr: success = " + cfg.getRunSuccess());
+	oprn("doPushExpr: isUtErr = " + cfg.getUtErr());
+	oprn("doPushExpr: kwdcount = " + cfg.getKwdCount());
+	*/
 	
 	public void oprn(String msg) {  
 		System.out.println(msg);
