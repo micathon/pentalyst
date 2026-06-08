@@ -9,6 +9,20 @@ public class RtMainTest {
 		common.handleStmt(fileName, errno);
 	}
 	
+	private void handlePushExpr(String fileName, int errno) {
+		GeneralCommonTest common = new GeneralCommonTest(12); 
+		common.doPushExpr(fileName, errno);
+	}
+	
+	private void doPushExpr(int errno) {
+		handlePushExpr("doPushExpr", errno);
+	}
+
+	@Test
+	public void doPushExpr200() {
+		doPushExpr(200);
+	}
+	
 	private void doZeroDiv(int errno) {
 		handleStmt("doZeroDiv", errno);
 	}
