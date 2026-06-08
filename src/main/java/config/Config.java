@@ -32,6 +32,9 @@ public class Config implements IConst {
 	private char rchar = 'r';
 	//private char xchar = 'x';
 	private char pchar = 'p';
+	private int kwdcount = 0;
+	private boolean isUtErr;
+	private boolean isRunSuccess;
 	private boolean isErrTrapped;
 	private boolean fileNotFound;
 	private int modno;
@@ -145,6 +148,7 @@ public class Config implements IConst {
 		// use defaults
 		isDirty = true;
 		isErrTrapped = false;
+		isUtErr = false;
 		modno = 0;
 		moderrno = 0;
 		srcerrno = 0;
@@ -291,6 +295,34 @@ public class Config implements IConst {
 	
 	public void trapROperError(int errno) {
 		setModSrcErr(13, errno);
+	}
+	
+	public boolean isRMainMod() {
+		return (modno == 12);
+	}
+	
+	public void incKwdCount() {
+		++kwdcount;
+	}
+	
+	public int getKwdCount() {
+		return kwdcount;
+	}
+	
+	public boolean getUtErr() {
+		return isUtErr;
+	}
+	
+	public void setUtErr(boolean flag) {
+		isUtErr = flag;
+	}
+	
+	public boolean getRunSuccess() {
+		return isRunSuccess;
+	}
+	
+	public void setRunSuccess(boolean flag) {
+		isRunSuccess = flag;
 	}
 	
 	public boolean getErrFileNotFound() {
