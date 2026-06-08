@@ -48,6 +48,7 @@ public class RunTime implements IConst, RunConst {
 	private boolean isBadUtPair;
 	private int runidx;
 	private Config cfg;
+	private RunUTime ut;
 	private static final char SP = ' ';
 	public HashMap<String, Integer> glbFunMap;
 	public HashMap<String, Integer> glbLocVarMap;
@@ -65,6 +66,7 @@ public class RunTime implements IConst, RunConst {
 		runop = new RunOperators(store, this, pp, cfg);
 		rcall = new RunCall(store, this, pp);
 		rfc = new RunFlowCtrl(store, this, pp, runop);
+		ut = new RunUTime(store, cfg);
 		locBaseIdx = 0;
 		varCountIdx = 0;
 		stmtCount = 0;
@@ -1052,60 +1054,8 @@ public class RunTime implements IConst, RunConst {
 			return BADOP;
 		}
 		rightp = node.getRightp();
-		// note: fn call can be disabled using global srch/repl
-		return uterrpushx(200, kwtyp,
-			rightp );//uterr
-	}
-	
-	private int uterrpushx(int errno, KeywordTyp kwtyp, int rtnval) {
-		Node node;
-		NodeCellTyp celltyp;
-		
-		if (!cfg.isRMainMod() || (errno != cfg.getSrcErrNo())) {
-			return rtnval;
-		}
-		switch (kwtyp) {
-		case ADD:
-		case MPY:
-		case XOR:
-		case ANDBITZ:
-		case ORBITZ:
-		case XORBITZ:
-		case MINUS:
-		case DIV:
-		case IDIV:
-		case MOD:
-		case SHL:
-		case SHR:
-		case SHRU:
-		case EQ:
-		case NE:
-		case LT:
-		case LE:
-		case GE:
-		case GT:
-		case NOT:
-		case NOTBITZ:
-		case AND:
-		case OR:
-			break; // case count = 23 = UTPUSHXCOUNT
-		default:
-			return rtnval;
-		}
-		if (rtnval <= 0) {
-			//oprn("uterrpushx: (1) kwtyp = " + kwtyp);
-			cfg.setUtErr(true);
-			return rtnval;
-		}
-		node = store.getNode(rtnval);
-		celltyp = node.getDownCellTyp();
-		if (celltyp != NodeCellTyp.LOCVAR) {
-			//oprn("uterrpushx: kwtyp = " + kwtyp + ", celltyp = " + celltyp);
-			cfg.setUtErr(true);
-			return rtnval;
-		}
-		cfg.incKwdCount();
-		return rtnval;
+		ut.z0200(200, kwtyp, rightp);
+		return rightp;
 	}
 	
 	private int pushSetStmt(Node node, KeywordTyp kwtyp) {
@@ -1121,6 +1071,7 @@ public class RunTime implements IConst, RunConst {
 			return BADSETSTMT;
 		}
 		node = store.getNode(rightp);
+		ut.z0210(210, node);
 		rightp = handleLeafTokenQuote(node);  // handle target expr.
 		if (rightp <= 0) {
 			return BADSETSTMT;
@@ -1141,6 +1092,7 @@ public class RunTime implements IConst, RunConst {
 			return BADINCDECSTMT;
 		}
 		node = store.getNode(rightp);
+		ut.z0210(220, node);
 		rightp = handleLeafTokenQuote(node);  // handle target expr.
 		if (rightp != 0) {
 			return BADINCDECSTMT;
@@ -1207,6 +1159,7 @@ public class RunTime implements IConst, RunConst {
 			return STKOVERFLOW;
 		}
 		rightp = node.getRightp();
+		ut.z0211(230, rightp);
 		return rightp;
 	}
 	
