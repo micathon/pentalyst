@@ -1,0 +1,8 @@
+do (
+gdefun (var mygvar) do (
+  p "doPushStmt230";
+);
+defun (p x)(var y) do (
+  println x;
+);
+)
