@@ -33,6 +33,7 @@ public interface RunConst {
 	int FNCALLNORTNVAL = -30;
 	int GENERR = -99;
 	int NEGBASEVAL = -1000;
+	int UTPUSHXCOUNT = 23;
 	int NONVAR = 0; // same as AddrNode
 	int LOCVAR = 1; //
 	int FLDVAR = 2; //
