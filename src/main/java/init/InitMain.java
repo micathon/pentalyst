@@ -78,6 +78,10 @@ public class InitMain implements IConst {
 		runInit(filePath, fileName, false, false, false);
 	}
 	
+	public boolean runInitSimple(String filePath, String fileName) {
+		return doSrcFile(filePath, fileName, false);
+	}
+	
 	private void doMasterFile(String mainFileName, String filePath) {
 		String fileName;
 		String srcFileName;
@@ -171,7 +175,7 @@ public class InitMain implements IConst {
 				rtnval = true;
 			}
 			else if (scanSrc.scanSummary(fatalErr)) {
-				rscan.run(0);
+				rtnval = rscan.run(0);
 			}
 		} catch (IOException exc) {
 			System.out.println("I/O Error: " + exc);
