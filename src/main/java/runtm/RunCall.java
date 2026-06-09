@@ -15,11 +15,13 @@ public class RunCall implements IConst, RunConst {
 	private RunTime rt;
 	private RunScanner rscan;
 	private RunPushPop pp;
+	private RunUTime ut;
 	
-	public RunCall(Store store, RunTime rt, RunPushPop pp) {
+	public RunCall(Store store, RunTime rt, RunPushPop pp, RunUTime ut) {
 		this.store = store;
 		this.rt = rt;
 		this.pp = pp;
+		this.ut = ut;
 	}
 	
 	public void setRscan(RunScanner rscan) {
@@ -427,6 +429,7 @@ public class RunCall implements IConst, RunConst {
 			return 0;
 		}
 		// (!pushOpAsNode(KeywordTyp.NULL)) 
+		ut.z0211(240, rightp);
 		node = store.getNode(rightp);
 		rightp = rt.handleExprToken(rightp, true);
 		return rightp;
