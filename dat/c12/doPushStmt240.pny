@@ -1,0 +1,15 @@
+do (
+gdefun (var x) do (
+  set x (p 240);
+  println "top: x =" x;
+);
+defun (p x)(var y) do (
+  println "p: x =" x;
+  if false do (
+    return x;
+  );
+  ++ x;
+  println "p: x =" x;
+  return x;
+);
+)
