@@ -47,6 +47,11 @@ public class RtMainTest {
 		doPushStmt(230);
 	}
 	
+	@Test
+	public void doPushStmt240() {
+		doPushStmt(240);
+	}
+	
 	private void doZeroDiv(int errno) {
 		handleStmt("doZeroDiv", errno);
 	}
