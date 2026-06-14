@@ -1,15 +1,26 @@
 do (
 gdefun (var x) do (
-  set x (p 240);
-  println "top: x =" x;
+  set x 240;
+  println "gdefun: x =" x;
+  #println "gdefun: p of x =" (p x);
+  p x;
+  println "btm: x =" x;
 );
-defun (p x)(var y) do (
+defun (p x)(var b c d e f y) do (
   println "p: x =" x;
-  if false do (
-    return x;
-  );
+  #if false do (
+  #  return x;
+  #);
   ++ x;
   println "p: x =" x;
-  return x;
+  set f (q x);
+  println "p: f =" f;
+  #set y x;
+  #return y;
 );
+defun (q x)(var a b c d e f y)  do (
+  ++ x;
+  println "q: x =" x;
+  set y x;
+  return y;
 )
