@@ -14,8 +14,6 @@ defun (p x)(var b c d e f y) do (
   println "p: (q x)" (q x);
   #println "p: (q x),e" (q x) e;
   println "p: btm";
-  #set y x;
-  #return y;
 );
 defun (q x)(var a b c d e f y)  do (
   ++ x;

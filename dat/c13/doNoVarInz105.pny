@@ -1,0 +1,11 @@
+do (
+gdefun (var mygvar) do (
+  p 72;
+);
+defun (p x)(var y z) do (
+  set y x;
+  println "p: y =" y;
+  set y z;
+  println "p: y2 =" y;
+);
+)
