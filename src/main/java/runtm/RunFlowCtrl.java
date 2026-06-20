@@ -16,14 +16,16 @@ public class RunFlowCtrl implements IConst, RunConst {
 	private RunOperators runop;
 	private RunScanner rscan;
 	private RunPushPop pp;
+	private RunUTime ut;
 	
 	public RunFlowCtrl(Store store, RunTime rt, RunPushPop pp,
-		RunOperators runop) 
+		RunOperators runop, RunUTime ut) 
 	{
 		this.store = store;
 		this.rt = rt;
 		this.pp = pp;
 		this.runop = runop;
+		this.ut = ut;
 	}
 	
 	public void setRscan(RunScanner rscan) {
@@ -740,6 +742,7 @@ public class RunFlowCtrl implements IConst, RunConst {
 			return STKOVERFLOW;
 		}
 		rightp = node.getRightp();
+		ut.z0211(250, rightp);
 		return rightp;
 	}
 	

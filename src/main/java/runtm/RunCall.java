@@ -344,8 +344,8 @@ public class RunCall implements IConst, RunConst {
 		if (rtnval < 0) {
 			return rtnval;
 		}
-		rt.setLocDepth(pp.popVal());
-		locDepth = rt.getLocDepth();
+		locDepth = pp.popVal();
+		rt.setLocDepth(locDepth);
 		omsg("runRtnStmt: locDepth = " + locDepth);
 		if (locDepth == NEGBASEVAL) {
 			return STKUNDERFLOW;

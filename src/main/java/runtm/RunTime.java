@@ -66,7 +66,7 @@ public class RunTime implements IConst, RunConst {
 		pp = new RunPushPop(store, this, cfg);
 		runop = new RunOperators(store, this, pp, cfg);
 		rcall = new RunCall(store, this, pp, ut);
-		rfc = new RunFlowCtrl(store, this, pp, runop);
+		rfc = new RunFlowCtrl(store, this, pp, runop, ut);
 		locBaseIdx = 0;
 		varCountIdx = 0;
 		stmtCount = 0;

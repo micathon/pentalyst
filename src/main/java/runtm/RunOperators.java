@@ -108,6 +108,7 @@ public class RunOperators implements IConst, RunConst {
 			srcNode = pp.getVarInzNode(srcNode);
 			if (srcNode == null) {
 				//oprn("runSetStmt: NOVARINZ");
+				cfg.trapROperError(105);
 				return NOVARINZ;
 			}
 		}
