@@ -8,13 +8,12 @@ gdefun (var x) do (
 );
 defun (p x)(var b c d e f y) do (
   println "p: x =" x;
-  #if false do (
-  #  return x;
-  #);
+  set e 555;
   ++ x;
   println "p: x =" x;
-  set f (q x);
-  println "p: f =" f;
+  println "p: (q x)" (q x);
+  #println "p: (q x),e" (q x) e;
+  println "p: btm";
   #set y x;
   #return y;
 );
