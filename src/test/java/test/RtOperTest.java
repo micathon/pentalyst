@@ -17,4 +17,13 @@ public class RtOperTest {
 	public void doZeroDiv100() {
 		doZeroDiv(100);
 	}
+
+	private void doNoVarInz(int errno) {
+		handleStmt("doNoVarInz", errno);
+	}
+	
+	@Test
+	public void doNoVarInz105() {
+		doNoVarInz(105);
+	}
 }
