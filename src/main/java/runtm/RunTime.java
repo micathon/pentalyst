@@ -379,6 +379,7 @@ public class RunTime implements IConst, RunConst {
 		// currently only called once, in body of gdefun stmt.
 		AddrNode zeroNode;
 		KeywordTyp kwtyp;
+		NodeCellTyp celltyp;
 		int rightp;
 
 		// return 0 if done (anywhere in this fn)
@@ -395,7 +396,9 @@ public class RunTime implements IConst, RunConst {
 			// handle stmt.
 			node = store.getNode(rightp);
 			kwtyp = node.getKeywordTyp();
-			omsg("doblock: kwtyp = " + kwtyp + ", rightp = " + rightp);
+			celltyp = node.getDownCellTyp();
+			omsgz("doblock: kwtyp = " + kwtyp + ", rightp = " + rightp);
+			omsg(", celltyp = " + celltyp);  // opt: was used to debug
 			if (kwtyp != KeywordTyp.ZSTMT) {
 				return BADZSTMT;
 			}
@@ -491,6 +494,9 @@ public class RunTime implements IConst, RunConst {
 			// loop control flag on stack
 			rightp = rfc.runForStmt();
 		}
+		/* else if (kwtyp == KeywordTyp.SET) {
+			rightp = rcall.runRtnStmt(true);
+		}*/
 		else {
 			rightp = rcall.runRtnStmt(false);
 		}

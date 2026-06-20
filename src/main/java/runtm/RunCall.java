@@ -310,7 +310,7 @@ public class RunCall implements IConst, RunConst {
 		int i;
 		int rtnval;
 		Integer val;
-		int locDepth = rt.getLocDepth();
+		int locDepth;
 		boolean isDelayPops = false;
 		AddrNode funcReturns = null;
 		Node node;
@@ -345,6 +345,7 @@ public class RunCall implements IConst, RunConst {
 			return rtnval;
 		}
 		rt.setLocDepth(pp.popVal());
+		locDepth = rt.getLocDepth();
 		omsg("runRtnStmt: locDepth = " + locDepth);
 		if (locDepth == NEGBASEVAL) {
 			return STKUNDERFLOW;
