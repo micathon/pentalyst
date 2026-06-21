@@ -1,0 +1,11 @@
+do (
+gdefun (var x) do (
+  set x 245;
+  println "gdefun: x =" x;
+  q x;
+  println "btm: x =" x;
+);
+defun (q x) do (
+  println "q: x =" x;
+);
+)

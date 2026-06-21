@@ -1,0 +1,23 @@
+do (
+gdefun (var x) do (
+  set x 2;
+  println "gdefun: x =" x;
+  p x;
+  println "btm: x =" x;
+);
+defun (p x)(var b c d e f y) do (
+  println "p: x =" x;
+  switch x
+  case 1 do (
+    set y (+ x 20);
+	println "case clause" x;
+    println "p: y =" y;
+  )
+  case 2 do (
+    set y (+ x 20);
+	println "case clause" x;
+    println "p: y =" y;
+  );
+  println "p: btm";
+);
+)

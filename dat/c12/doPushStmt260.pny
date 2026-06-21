@@ -1,0 +1,18 @@
+do (
+gdefun (var x) do (
+  set x true;
+  println "gdefun: x =" x;
+  p x;
+  println "btm: x =" x;
+);
+defun (p x)(var b c d e f y) do (
+  println "p: x =" x;
+  while x do (
+    set y (not x);
+	println "while loop";
+    println "p: y =" y;
+	break;
+  );
+  println "p: btm";
+);
+)
