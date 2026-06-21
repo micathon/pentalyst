@@ -53,8 +53,23 @@ public class RtMainTest {
 	}
 	
 	@Test
+	public void doPushStmt245() {
+		doPushStmt(245);
+	}
+	
+	@Test
 	public void doPushStmt250() {
 		doPushStmt(250);
+	}
+	
+	@Test
+	public void doPushStmt260() {
+		doPushStmt(260);
+	}
+	
+	@Test
+	public void doPushStmt270() {
+		doPushStmt(270);
 	}
 	
 	private void doZeroDiv(int errno) {
