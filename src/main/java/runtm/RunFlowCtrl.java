@@ -276,6 +276,7 @@ public class RunFlowCtrl implements IConst, RunConst {
 			return STKOVERFLOW;
 		}
 		rightp = node.getRightp();
+		ut.z0211(260, rightp);
 		return rightp;
 	}
 	
@@ -799,6 +800,7 @@ public class RunFlowCtrl implements IConst, RunConst {
 			return STKOVERFLOW;
 		}
 		rightp = node.getRightp();
+		ut.z0211(270, rightp);
 		return rightp;
 	}
 	

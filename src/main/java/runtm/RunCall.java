@@ -174,6 +174,7 @@ public class RunCall implements IConst, RunConst {
 			return STKOVERFLOW;
 		}
 		rightp = rt.handleLeafToken(node);
+		ut.z0211(245, rightp);
 		return rightp;
 	}
 	
