@@ -83,6 +83,9 @@ public class RunUTime implements IConst, RunConst {
 	}
 
 	public void z0211(int errno, int rightp) {
+		if (rightp <= 0) {
+			return;
+		}
 		Node node = store.getNode(rightp);
 		z0210(errno, node);
 	}
