@@ -60,6 +60,27 @@ public class GeneralCommonTest implements RunConst {
 		fullerrno = cfg.getMillErrNo(modno, srcerrno);
 		assertEquals(fullerrno, (modno * 1000) + errno);
 	}
+
+	public void handleStmtValues(String fileName, int errno,
+		int ival, double dval) 
+	{
+		int intVal;
+		double floatVal;
+		boolean isFloatEq;
+		
+		handleStmt(fileName, errno);
+		intVal = cfg.getIntVal();
+		floatVal = cfg.getFloatVal();
+		isFloatEq = isFloatEqual(floatVal, dval);
+		assertEquals(intVal, ival);
+		assertTrue(isFloatEq);
+	}
+	
+	private boolean isFloatEqual(double x, double y) {
+		boolean isEq;
+		isEq = Math.abs(x - y) < 0.000001;
+		return isEq;
+	}
 	
 	private String appendErrNo(String fileName, int errno) {
 		fileName += errno;
