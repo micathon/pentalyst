@@ -40,6 +40,10 @@ public class Config implements IConst {
 	private int modno;
 	private int moderrno;
 	private int srcerrno;
+	private int intVal = 0;
+	private double floatVal = 0.0;
+	private boolean isIntErrTrapped = false;
+	private boolean isFloatErrTrapped = false;
 
 	public Config(String filePath, String sepWord, String outFileName) {
 		Path fPath; 
@@ -295,6 +299,40 @@ public class Config implements IConst {
 	
 	public void trapROperError(int errno) {
 		setModSrcErr(13, errno);
+	}
+	
+	public void trapROperIntError(int errno, int val) {
+		if (isIntErrTrapped) {
+			return;
+		}
+		isIntErrTrapped = true;
+		trapROperError(errno);
+		setIntVal(val);
+	}
+	
+	private void setIntVal(int val) {
+		intVal = val;
+	}
+	
+	public int getIntVal() {
+		return intVal;
+	}
+	
+	public void trapROperFloatError(int errno, double val) {
+		if (isFloatErrTrapped) {
+			return;
+		}
+		isFloatErrTrapped = true;
+		trapROperError(errno);
+		setFloatVal(val);
+	}
+	
+	private void setFloatVal(double val) {
+		floatVal = val;
+	}
+	
+	public double getFloatVal() {
+		return floatVal;
 	}
 	
 	public boolean isRMainMod() {
