@@ -12,6 +12,7 @@ public class GeneralCommonTest implements RunConst {
 
 	private int modno;
 	private String modstr;
+	private double zdval = 999.0;
 	private Config cfg;
 	
 	public GeneralCommonTest(int modno) {
@@ -70,10 +71,12 @@ public class GeneralCommonTest implements RunConst {
 		
 		handleStmt(fileName, errno);
 		intVal = cfg.getIntVal();
-		floatVal = cfg.getFloatVal();
-		isFloatEq = isFloatEqual(floatVal, dval);
 		assertEquals(intVal, ival);
-		assertTrue(isFloatEq);
+		if (!isFloatEqual(dval, zdval)) {
+			floatVal = cfg.getFloatVal();
+			isFloatEq = isFloatEqual(floatVal, dval);
+			assertTrue(isFloatEq);
+		}
 	}
 	
 	private boolean isFloatEqual(double x, double y) {
@@ -115,6 +118,10 @@ public class GeneralCommonTest implements RunConst {
 	oprn("doPushExpr: isUtErr = " + cfg.getUtErr());
 	oprn("doPushExpr: kwdcount = " + cfg.getKwdCount());
 	*/
+	
+	public double getZdval() {
+		return zdval;
+	}
 	
 	public void oprn(String msg) {  
 		System.out.println(msg);
