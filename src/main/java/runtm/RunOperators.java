@@ -604,12 +604,14 @@ public class RunOperators implements IConst, RunConst {
 		}
 		if (isResFloat) {
 			rtnval = pushFloat(fproduct);
+			cfg.trapROperFloatError(130, fproduct);
 		}
 		else if (isResLong) {
 			rtnval = pushLong(product);
 		}
 		else { 
 			rtnval = pushIntStk((int)product) ? 0 : STKOVERFLOW;
+			cfg.trapROperIntError(130, (int)product);
 		}
 		return rtnval;
 	}
@@ -690,6 +692,7 @@ public class RunOperators implements IConst, RunConst {
 			base = getIntOffStk(stkidx);
 		}
 		quotient = base / denom;
+		cfg.trapROperFloatError(140, quotient);
 		rtnval = pushFloat(quotient);
 		return rtnval;
 	}
@@ -811,12 +814,14 @@ public class RunOperators implements IConst, RunConst {
 		isResLong = isDeltaLong || isBaseLong;
 		if (isResFloat) {
 			rtnval = pushFloat(fdiff);
+			cfg.trapROperFloatError(150, fdiff);
 		}
 		else if (isResLong) {
 			rtnval = pushLong(diff);
 		}
 		else { 
 			rtnval = pushIntStk((int)diff) ? 0 : STKOVERFLOW;
+			cfg.trapROperIntError(150, (int)diff);
 		}
 		return rtnval;
 	}
@@ -887,6 +892,7 @@ public class RunOperators implements IConst, RunConst {
 		}
 		if (isMod) {
 			quotient = base % denom;
+			cfg.trapROperIntError(145, (int)quotient);
 		}
 		else {
 			quotient = base / denom;
@@ -896,6 +902,7 @@ public class RunOperators implements IConst, RunConst {
 		}
 		else { 
 			rtnval = pushIntStk((int)quotient) ? 0 : STKOVERFLOW;
+			cfg.trapROperIntError(140, (int)quotient);
 		}
 		return rtnval;
 	}
@@ -972,6 +979,7 @@ public class RunOperators implements IConst, RunConst {
 		}
 		else { 
 			rtnval = pushIntStk((int)result) ? 0 : STKOVERFLOW;
+			cfg.trapROperIntError(160, (int)result);
 		}
 		return rtnval;
 	}
@@ -1134,6 +1142,7 @@ public class RunOperators implements IConst, RunConst {
 		}
 		else { 
 			rtnval = pushIntStk((int)res) ? 0 : STKOVERFLOW;
+			cfg.trapROperIntError(170, (int)res);
 		}
 		return rtnval;
 	}
