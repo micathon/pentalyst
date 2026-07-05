@@ -1191,10 +1191,12 @@ public class RunOperators implements IConst, RunConst {
 		switch (kwtyp) {
 		case NOT:
 			delta = 1 - delta;
+			cfg.trapROperBoolError(240, (delta == 1));
 			break;
 		case NOTBITZ:
 		case CQUEST:  //## don't need
 			delta = ~delta;
+			cfg.trapROperIntError(175, (int)delta);
 			break;
 		default:
 			return BADOPTYP;
@@ -1232,6 +1234,7 @@ public class RunOperators implements IConst, RunConst {
 		long aval = 0;
 		long bval = 0;
 		int ival;
+		int errno;
 		boolean flag;
 		
 		omsg("runComparExpr: top");
@@ -1328,25 +1331,32 @@ public class RunOperators implements IConst, RunConst {
 			switch (kwtyp) {
 			case EQ: 
 				flag = (aval == bval);
+				errno = 180;
 				break;
 			case NE: 
 				flag = (aval != bval);
+				errno = 190;
 				break;
 			case LT: 
 				flag = (aval < bval);
+				errno = 200;
 				break;
 			case LE: 
 				flag = (aval <= bval);
+				errno = 210;
 				break;
 			case GE: 
 				flag = (aval >= bval);
+				errno = 220;
 				break;
 			case GT: 
 				flag = (aval > bval);
+				errno = 230;
 				break;
 			default:
 				return BADOPTYP;
 			}
+			cfg.trapROperBoolError(errno, flag);
 		}
 		ival = flag ? 1 : 0;
 		rtnval = pushBoolStk(ival) ? 0 : STKOVERFLOW;
@@ -1363,6 +1373,7 @@ public class RunOperators implements IConst, RunConst {
 		int stkidx;
 		int rtnval;
 		int ival;
+		int errno;
 		boolean flag;
 
 		omsg("runStrCompExpr: top");
@@ -1393,25 +1404,32 @@ public class RunOperators implements IConst, RunConst {
 		switch (kwtyp) {
 		case EQ:
 			flag = sval.equals(tval);
+			errno = 250;
 			break;
 		case NE:
 			flag = !sval.equals(tval);
+			errno = 260;
 			break;
 		case LT:
 			flag = (sval.compareTo(tval) < 0);
+			errno = 270;
 			break;
 		case LE:
 			flag = (sval.compareTo(tval) <= 0);
+			errno = 280;
 			break;
 		case GE:
 			flag = (sval.compareTo(tval) >= 0);
+			errno = 290;
 			break;
 		case GT:
 			flag = (sval.compareTo(tval) > 0);
+			errno = 300;
 			break;
 		default:
 			return BADOPTYP;
 		}
+		cfg.trapROperBoolError(errno, flag);
 		ival = flag ? 1 : 0;
 		omsg("runStrCompExpr: ival = " + ival);
 		rtnval = pushBoolStk(ival) ? 0 : STKOVERFLOW;
