@@ -109,4 +109,90 @@ public class RtOperTest {
 		doAndBitzOper(170, 126);
 	}
 	
+	private void doNotBitzOper(int errno, int ival) {
+		handleStmtValues("doNotBitzOper", errno, ival, zdval);
+	}
+	
+	@Test
+	public void doNotBitzOper175() {
+		doNotBitzOper(175, 129);
+	}
+	
+	private void doEqOper(int errno) {
+		handleStmt("doEqOper", errno);
+	}
+	
+	@Test
+	public void doEqOper180() {
+		doEqOper(180);
+	}
+
+	@Test
+	public void doEqOper190() {
+		doEqOper(190);
+	}
+
+	@Test
+	public void doEqOper200() {
+		doEqOper(200);
+	}
+
+	@Test
+	public void doEqOper210() {
+		doEqOper(210);
+	}
+
+	@Test
+	public void doEqOper220() {
+		doEqOper(220);
+	}
+
+	@Test
+	public void doEqOper230() {
+		doEqOper(230);
+	}
+
+	private void doNotOper(int errno) {
+		handleStmt("doNotOper", errno);
+	}
+	
+	@Test
+	public void doNotOper240() {
+		doNotOper(240);
+	}
+	
+	private void doStrEqOper(int errno) {
+		handleStmt("doStrEqOper", errno);
+	}
+	
+	@Test
+	public void doStrEqOper250() {
+		doStrEqOper(250);
+	}
+
+	@Test
+	public void doStrEqOper260() {
+		doStrEqOper(260);
+	}
+
+	@Test
+	public void doStrEqOper270() {
+		doStrEqOper(270);
+	}
+
+	@Test
+	public void doStrEqOper280() {
+		doStrEqOper(280);
+	}
+
+	@Test
+	public void doStrEqOper290() {
+		doStrEqOper(290);
+	}
+
+	@Test
+	public void doStrEqOper300() {
+		doStrEqOper(300);
+	}
+
 }

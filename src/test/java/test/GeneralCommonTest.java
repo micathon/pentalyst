@@ -60,6 +60,9 @@ public class GeneralCommonTest implements RunConst {
 		srcerrno = cfg.getSrcErrNo();
 		fullerrno = cfg.getMillErrNo(modno, srcerrno);
 		assertEquals(fullerrno, (modno * 1000) + errno);
+		if (cfg.getBoolErrTrapped()) {
+			assertTrue(cfg.getErrSuccess());
+		}
 	}
 
 	public void handleStmtValues(String fileName, int errno,
