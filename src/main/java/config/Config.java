@@ -42,8 +42,10 @@ public class Config implements IConst {
 	private int srcerrno;
 	private int intVal = 0;
 	private double floatVal = 0.0;
+	private boolean isErrSuccess = false;
 	private boolean isIntErrTrapped = false;
 	private boolean isFloatErrTrapped = false;
+	private boolean isBoolErrTrapped = false;
 
 	public Config(String filePath, String sepWord, String outFileName) {
 		Path fPath; 
@@ -302,7 +304,7 @@ public class Config implements IConst {
 	}
 	
 	public void trapROperIntError(int errno, int val) {
-		if (isIntErrTrapped) {
+		if (isIntErrTrapped || isBoolErrTrapped) {
 			return;
 		}
 		isIntErrTrapped = true;
@@ -333,6 +335,23 @@ public class Config implements IConst {
 	
 	public double getFloatVal() {
 		return floatVal;
+	}
+	
+	public void trapROperBoolError(int errno, boolean flag) {
+		if (isBoolErrTrapped) {
+			return;
+		}
+		isBoolErrTrapped = true;
+		trapROperError(errno);
+		isErrSuccess = flag;
+	}
+	
+	public boolean getBoolErrTrapped() {
+		return isBoolErrTrapped;
+	}
+	
+	public boolean getErrSuccess() {
+		return isErrSuccess;
 	}
 	
 	public boolean isRMainMod() {
