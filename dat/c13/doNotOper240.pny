@@ -1,0 +1,11 @@
+do (
+gdefun (var mygvar) do (
+  p 1;
+);
+defun (p x)(var y n) do (
+  println "not: n";
+  set y false;
+  set n (not y);
+  println "p: n =" n;
+);
+)

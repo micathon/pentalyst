@@ -1,0 +1,10 @@
+do (
+gdefun (var mygvar) do (
+  p 1;
+);
+defun (p x)(var y) do (
+  println "eq: y";
+  set y (== 0 0);
+  println "p: y =" y;
+);
+)
