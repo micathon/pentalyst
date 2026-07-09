@@ -438,6 +438,7 @@ public class RunFlowCtrl implements IConst, RunConst {
 		if (!pushOp(KeywordTyp.DO)) {
 			return STKOVERFLOW;
 		}
+		ut.z0300(100, kwtyp);
 		return 0;
 	}
 

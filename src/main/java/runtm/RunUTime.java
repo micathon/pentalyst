@@ -89,5 +89,25 @@ public class RunUTime implements IConst, RunConst {
 		Node node = store.getNode(rightp);
 		z0210(errno, node);
 	}
+	
+	public void z0300(int errno, KeywordTyp kwtyp) {
+		int kwval = kwtyp.ordinal();
+		switch (kwtyp) {
+		case IF:
+			break;
+		case ELIF:
+			errno += 10;
+			break;
+		case ELSE:
+			errno += 20;
+			break;
+		case FOR:
+			errno += 30;
+			break;
+		default:
+			return;
+		}
+		cfg.trapROperIntError(errno, kwval);
+	}
 
 }
