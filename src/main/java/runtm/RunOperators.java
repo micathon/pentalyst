@@ -116,7 +116,7 @@ public class RunOperators implements IConst, RunConst {
 		if (srcNode.isInt()) {
 			page = null;
 			idx = 0;
-			cfg.trapROperIntError(110, addr);
+			cfg.trapROperIntError(99, addr);
 		}
 		else {
 			page = store.getPage(addr);
@@ -148,7 +148,7 @@ public class RunOperators implements IConst, RunConst {
 		case FLOAT:
 			dval = page.getFloat(idx);
 			omsg("runSetStmt: dval = " + dval);
-			cfg.trapROperFloatError(110, dval);
+			cfg.trapROperFloatError(99, dval);
 			break;
 		case STRING:
 			sval = page.getString(idx);
