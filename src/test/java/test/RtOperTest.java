@@ -42,8 +42,8 @@ public class RtOperTest {
 	}
 	
 	@Test
-	public void doSetStmt110() {
-		doSetStmt(110, 2026, 3.1416);
+	public void doSetStmt99() {
+		doSetStmt(99, 2026, 3.1416);
 	}
 	
 	private void doAddOper(int errno, int ival, double dval) {

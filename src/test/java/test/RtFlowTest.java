@@ -28,12 +28,12 @@ public class RtFlowTest {
 	public void doIfStmt100() {
 		doIfStmt(100, KeywordTyp.IF.ordinal());
 	}
-/*	
+	
 	@Test
 	public void doIfStmt110() {
 		doIfStmt(110, KeywordTyp.ELIF.ordinal());
 	}
-	
+
 	@Test
 	public void doIfStmt120() {
 		doIfStmt(120, KeywordTyp.ELSE.ordinal());
@@ -43,5 +43,5 @@ public class RtFlowTest {
 	public void doIfStmt130() {
 		doIfStmt(130, KeywordTyp.FOR.ordinal());
 	}
-*/	
+	
 }
