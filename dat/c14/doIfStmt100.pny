@@ -1,0 +1,26 @@
+do (
+gdefun (var mygvar) do (
+  p 3;
+);
+defun (p x)(var i n) do (
+  set n x;
+  println "if: top";
+  if true do (
+    #println "if";
+	return;
+  );
+  {#
+  elif true do (
+    println "elif";
+	return;
+  )
+  else do (
+    println "else";
+	return;
+  );
+  for (= i 0; ? (< i n); ++ i) do (
+    println "p: i =" i;
+  );
+  #}
+);
+)
