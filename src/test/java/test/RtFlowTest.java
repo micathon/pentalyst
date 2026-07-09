@@ -1,0 +1,47 @@
+package test;
+
+import org.junit.Test;
+import iconst.KeywordTyp;
+
+public class RtFlowTest {
+
+	private double zdval;
+
+	public void handleStmt(String fileName, int errno) {
+		GeneralCommonTest common = new GeneralCommonTest(14); 
+		common.handleStmt(fileName, errno);
+	}
+
+	public void handleStmtValues(String fileName, int errno,
+			int ival, double dval) 
+		{
+			GeneralCommonTest common = new GeneralCommonTest(14); 
+			zdval = common.getZdval();
+			common.handleStmtValues(fileName, errno, ival, dval);
+		}
+
+	private void doIfStmt(int errno, int ival) {
+		handleStmtValues("doIfStmt", errno, ival, zdval);
+	}
+	
+	@Test
+	public void doIfStmt100() {
+		doIfStmt(100, KeywordTyp.IF.ordinal());
+	}
+/*	
+	@Test
+	public void doIfStmt110() {
+		doIfStmt(110, KeywordTyp.ELIF.ordinal());
+	}
+	
+	@Test
+	public void doIfStmt120() {
+		doIfStmt(120, KeywordTyp.ELSE.ordinal());
+	}
+	
+	@Test
+	public void doIfStmt130() {
+		doIfStmt(130, KeywordTyp.FOR.ordinal());
+	}
+*/	
+}
