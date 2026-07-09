@@ -3,7 +3,7 @@ gdefun (var mygvar) do (
   p 3;
 );
 defun (p x)(var i n) do (
-  set n x;
+  #set n x;
   println "else: top";
   if false do (
     println "if";

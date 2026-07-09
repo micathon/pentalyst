@@ -3,7 +3,7 @@ gdefun (var mygvar) do (
   p 3;
 );
 defun (p x)(var i n) do (
-  set n x;
+  #set n x;
   println "for: top";
   if false do (
     println "if";
@@ -13,8 +13,8 @@ defun (p x)(var i n) do (
     println "elif";
 	return;
   );
-  for (= i 0; ? (< i n); ++ i) do (
-    println "p: i =" i;
+  for (= i 0; ? false; ++ i) do (
+    #println "p: i =" i;
   );
 );
 )
