@@ -53,9 +53,14 @@ public class GeneralCommonTest implements RunConst {
 	public void handleStmt(String fileName, int errno) {
 		int srcerrno;
 		int fullerrno;
+		int dig;
 
 		if(!doRunTest(fileName, errno, false)) {
 			return;
+		}
+		dig = errno % 10;
+		if (dig < 5) {  // enable up to 5 .pny files sharing an errno
+			errno -= dig;
 		}
 		srcerrno = cfg.getSrcErrNo();
 		fullerrno = cfg.getMillErrNo(modno, srcerrno);

@@ -58,10 +58,10 @@ public class RtFlowTest {
 	public void doIfStmt160() {
 		doIfStmt(160, KeywordTyp.ELSE.ordinal());
 	}
-/*	
+
 	@Test
-	public void doIfStmt170() {
-		doIfStmt(170, KeywordTyp.FOR.ordinal());
+	public void doIfStmt161() {
+		doIfStmt(161, KeywordTyp.ELSE.ordinal());
 	}
-*/	
+	
 }
