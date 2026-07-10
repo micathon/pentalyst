@@ -44,4 +44,24 @@ public class RtFlowTest {
 		doIfStmt(130, KeywordTyp.FOR.ordinal());
 	}
 	
+	@Test
+	public void doIfStmt140() {
+		doIfStmt(140, KeywordTyp.CASE.ordinal());
+	}
+	
+	@Test
+	public void doIfStmt150() {
+		doIfStmt(150, KeywordTyp.CASE.ordinal());
+	}
+	
+	@Test
+	public void doIfStmt160() {
+		doIfStmt(160, KeywordTyp.ELSE.ordinal());
+	}
+/*	
+	@Test
+	public void doIfStmt170() {
+		doIfStmt(170, KeywordTyp.FOR.ordinal());
+	}
+*/	
 }
