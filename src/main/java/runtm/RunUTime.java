@@ -12,10 +12,18 @@ public class RunUTime implements IConst, RunConst {
 
 	private Store store;
 	private Config cfg;
+	private boolean isSkippedCase;
+	private boolean isSwitch;
 
 	public RunUTime(Store store, Config cfg) {
 		this.store = store;
 		this.cfg = cfg;
+		isSkippedCase = false;
+		isSwitch = false;
+	}
+	
+	public void oprn(String msg) {  
+		System.out.println(msg);
 	}
 	
 	public void z0200(int errno, KeywordTyp kwtyp, int rtnval) {
@@ -91,7 +99,14 @@ public class RunUTime implements IConst, RunConst {
 	}
 	
 	public void z0300(int errno, KeywordTyp kwtyp) {
-		int kwval = kwtyp.ordinal();
+		int kwval;
+		boolean isElseSwitch = false;
+		
+		if (cfg.getElseSwitch()) {
+			isElseSwitch = true;
+			kwtyp = KeywordTyp.ELSE;
+		}
+		kwval = kwtyp.ordinal();
 		switch (kwtyp) {
 		case IF:
 			break;
@@ -99,15 +114,47 @@ public class RunUTime implements IConst, RunConst {
 			errno += 10;
 			break;
 		case ELSE:
-			errno += 20;
+			if (isElseSwitch) {
+				errno += 60; // switch
+			}
+			else {
+				errno += 20; 
+			}
 			break;
 		case FOR:
-			errno += 30;
+			if (isSwitch) {
+				errno += 70;
+			}
+			else {
+				errno += 30;
+			}
+			break;
+		case CASE:
+			errno += 40;
+			if (isSkippedCase) {
+				errno += 10;
+			}
 			break;
 		default:
 			return;
 		}
 		cfg.trapROperIntError(errno, kwval);
+	}
+	
+	public void setSkippedCase(boolean flag) {
+		isSkippedCase = flag;
+	}
+	
+	public boolean getSkippedCase() {
+		return isSkippedCase;
+	}
+
+	public void setSwitch(boolean flag) {
+		isSwitch = flag;
+	}
+	
+	public boolean getSwitch() {
+		return isSwitch;
 	}
 
 }

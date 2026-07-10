@@ -363,6 +363,8 @@ public class RunFlowCtrl implements IConst, RunConst {
 		int rtnval;
 		boolean isWhile;
 		boolean isCase;
+		boolean isSwitch;
+		KeywordTyp altkwd;
 		
 		kwtyp = topKwd();
 		isWhile = (kwtyp == KeywordTyp.WHILE);
@@ -383,6 +385,9 @@ public class RunFlowCtrl implements IConst, RunConst {
 			}
 			if (isCase) {
 				popKwd();
+				altkwd = topKwd();
+				isSwitch = (altkwd == KeywordTyp.SWITCH);
+				ut.setSwitch(isSwitch);
 				rtnval = runop.runEqExpr();
 				if (rtnval < 0) {
 					return rtnval;
@@ -425,11 +430,12 @@ public class RunFlowCtrl implements IConst, RunConst {
 			return 0;
 		}
 		else {
+			ut.setSkippedCase(true);
 			rightp = node.getRightp();
 			return rightp;
 		}
 		if (isCase) {
-			//popKwd();
+			ut.z0300(100, kwtyp);
 		}
 		rightp = node.getDownp();
 		if (!pushAddr(rightp)) {
