@@ -46,6 +46,7 @@ public class Config implements IConst {
 	private boolean isIntErrTrapped = false;
 	private boolean isFloatErrTrapped = false;
 	private boolean isBoolErrTrapped = false;
+	private boolean isElseSwitch = false;
 
 	public Config(String filePath, String sepWord, String outFileName) {
 		Path fPath; 
@@ -312,6 +313,10 @@ public class Config implements IConst {
 		setIntVal(val);
 	}
 	
+	public void setIntErrTrapped(boolean flag) {
+		isIntErrTrapped = flag;
+	}
+	
 	private void setIntVal(int val) {
 		intVal = val;
 	}
@@ -356,6 +361,14 @@ public class Config implements IConst {
 	
 	public boolean isRMainMod() {
 		return (modno == 12);
+	}
+	
+	public void setElseSwitch(boolean flag) {
+		isElseSwitch = flag;
+	}
+	
+	public boolean getElseSwitch() {
+		return isElseSwitch;
 	}
 	
 	public void incKwdCount() {
