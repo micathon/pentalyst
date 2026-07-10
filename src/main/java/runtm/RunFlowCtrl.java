@@ -434,9 +434,6 @@ public class RunFlowCtrl implements IConst, RunConst {
 			rightp = node.getRightp();
 			return rightp;
 		}
-		if (isCase) {
-			ut.z0300(100, kwtyp);
-		}
 		rightp = node.getDownp();
 		if (!pushAddr(rightp)) {
 			return STKOVERFLOW;
