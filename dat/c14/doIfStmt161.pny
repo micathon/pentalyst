@@ -1,0 +1,22 @@
+do (
+gdefun (var mygvar) do (
+  p 3;
+);
+defun (p x)(var i n) do (
+  #set n x;
+  println "switch: top";
+  switch "a"
+  case "b" do (
+    println "case = b";
+    return;
+  )
+  case "c" do (
+    println "case = c";
+    return;
+  );
+  println "no cases";
+  for (= i 0; ? false; ++ i) do (
+    #println "p: i =" i;
+  );
+);
+)
