@@ -160,6 +160,7 @@ public class RunOperators implements IConst, RunConst {
 		}
 		if (!isDup) { }
 		else if (isLong) {
+			cfg.trapROperLongError(longval);
 			addr = store.allocLong(longval);
 		}
 		else {
