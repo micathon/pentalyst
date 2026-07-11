@@ -1,6 +1,7 @@
 package config;
 
 import iconst.IConst;
+import iconst.RunConst;
 import java.io.File;
 import java.io.PrintStream;
 import java.io.FileNotFoundException;
@@ -10,7 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.charset.StandardCharsets;
 
-public class Config implements IConst {
+public class Config implements IConst, RunConst {
 
 	private boolean debug = false;
 	private boolean fileout = false;
@@ -353,6 +354,11 @@ public class Config implements IConst {
 	
 	public boolean getBoolErrTrapped() {
 		return isBoolErrTrapped;
+	}
+	
+	public void trapROperLongError(long longval) {
+		srcerrno = LONGERRNO; 
+		setIntVal((int)longval);
 	}
 	
 	public boolean getErrSuccess() {
