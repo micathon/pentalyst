@@ -1,0 +1,21 @@
+do (
+gdefun (var mygvar) do (
+  p 0L true true;
+);
+defun (p x a b)(var i n) do (
+  println "while: top";
+  while (or a b) do (
+    # loop runs twice
+    println "while body";
+	++ x;
+	if a do (
+	  set a false;
+	)
+	else do (
+	  set b false;
+	);
+  );
+  set n x;
+  println "while: n =" n;
+);
+)

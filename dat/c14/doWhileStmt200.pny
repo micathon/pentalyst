@@ -1,0 +1,14 @@
+do (
+gdefun (var mygvar) do (
+  p 0L;
+);
+defun (p x)(var i n) do (
+  println "while: top";
+  while false do (
+    println "while body";
+	++ x;
+  );
+  set n x;
+  println "while: n =" n;
+);
+)
