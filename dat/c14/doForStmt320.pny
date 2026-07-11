@@ -1,0 +1,13 @@
+do (
+gdefun (var mygvar) do (
+  p 2L;
+);
+defun (p x)(var i n) do (
+  println "for300: top";
+  for (= i 0L; ? (< i x); ++ i) do (
+    println "for: i =" i;
+  );
+  set n x;
+  println "for: n =" n;
+);
+)
