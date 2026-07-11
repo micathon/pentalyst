@@ -83,4 +83,23 @@ public class RtFlowTest {
 		doWhileStmt(220, 2);
 	}
 	
+	private void doForStmt(int errno, int ival) {
+		handleStmtValues("doForStmt", errno, ival, zdval);
+	}
+	
+	@Test
+	public void doForStmt300() {
+		doForStmt(300, 0);
+	}
+	
+	@Test
+	public void doForStmt310() {
+		doForStmt(310, 1);
+	}
+	
+	@Test
+	public void doForStmt320() {
+		doForStmt(320, 2);
+	}
+	
 }
