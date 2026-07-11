@@ -64,4 +64,23 @@ public class RtFlowTest {
 		doIfStmt(161, KeywordTyp.ELSE.ordinal());
 	}
 	
+	private void doWhileStmt(int errno, int ival) {
+		handleStmtValues("doWhileStmt", errno, ival, zdval);
+	}
+	
+	@Test
+	public void doWhileStmt200() {
+		doWhileStmt(200, 0);
+	}
+	
+	@Test
+	public void doWhileStmt210() {
+		doWhileStmt(210, 1);
+	}
+
+	@Test
+	public void doWhileStmt220() {
+		doWhileStmt(220, 2);
+	}
+	
 }

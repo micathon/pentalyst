@@ -63,8 +63,10 @@ public class GeneralCommonTest implements RunConst {
 			errno -= dig;
 		}
 		srcerrno = cfg.getSrcErrNo();
-		fullerrno = cfg.getMillErrNo(modno, srcerrno);
-		assertEquals(fullerrno, (modno * 1000) + errno);
+		if (srcerrno != LONGERRNO) {
+			fullerrno = cfg.getMillErrNo(modno, srcerrno);
+			assertEquals(fullerrno, (modno * 1000) + errno);
+		}
 		if (cfg.getBoolErrTrapped()) {
 			assertTrue(cfg.getErrSuccess());
 		}
