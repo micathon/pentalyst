@@ -366,6 +366,9 @@ public class Config implements IConst, RunConst {
 	}
 	
 	public void trapRCallIntError(int errno, int val) {
+		if (isIntErrTrapped || isBoolErrTrapped) {
+			return;
+		}
 		trapRCallError(errno);
 		setIntVal(val);
 	}
