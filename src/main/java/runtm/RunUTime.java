@@ -14,12 +14,14 @@ public class RunUTime implements IConst, RunConst {
 	private Config cfg;
 	private boolean isSkippedCase;
 	private boolean isSwitch;
+	private boolean isDisabled;
 
 	public RunUTime(Store store, Config cfg) {
 		this.store = store;
 		this.cfg = cfg;
 		isSkippedCase = false;
 		isSwitch = false;
+		isDisabled = false;
 	}
 	
 	public void oprn(String msg) {  
@@ -158,7 +160,22 @@ public class RunUTime implements IConst, RunConst {
 	}
 
 	public void z0500(int errno, int ival) {
-		cfg.trapRCallIntError(errno, ival);
+		switch (errno) {
+		case 200:
+			if (isDisabled) {
+				return;
+			}
+		case 220:
+			cfg.trapRCallIntError(errno, ival);
+			break;
+		case 300:
+			if (ival < 3) {
+				return;
+			}
+			cfg.trapRCallIntError(errno, ival);
+			isDisabled = true;
+			break;
+		}
 	}
 	
 }

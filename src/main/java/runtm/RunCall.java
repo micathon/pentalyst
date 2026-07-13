@@ -339,6 +339,7 @@ public class RunCall implements IConst, RunConst {
 			if (!pp.popSafeVal() || !pp.popSafeVal()) {
 				return STKUNDERFLOW;
 			}
+			ut.z0500(220, val);
 		}
 		//popVal(); // EDBF: pop NULL
 		//popVal(); // EDBF: pop ZSTMT
@@ -463,6 +464,7 @@ public class RunCall implements IConst, RunConst {
 		if (!pp.pushInt(0)) {
 			return STKOVERFLOW;
 		}
+		ut.z0500(300, i);
 		return 0;
 	}
 	
