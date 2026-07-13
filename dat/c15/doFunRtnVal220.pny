@@ -1,0 +1,10 @@
+do (
+gdefun (var mygvar) do (
+  println "p rtn val =" (p 10 20);
+);
+defun (p x y)(var a b c) do (
+  println "p: top";
+  println "p: x =" x "; y =" y;
+  return 7;
+);
+)

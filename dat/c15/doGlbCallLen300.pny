@@ -1,0 +1,10 @@
+do (
+gdefun (var x y z) do (
+  println "glb call len: top";
+  p 1;
+);
+defun (p x)(var a b c) do (
+  println "p: top";
+  println "p: x =" x;
+);
+)
