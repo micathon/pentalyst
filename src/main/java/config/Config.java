@@ -361,6 +361,15 @@ public class Config implements IConst, RunConst {
 		setIntVal((int)longval);
 	}
 	
+	public void trapRCallError(int errno) {
+		setModSrcErr(15, errno);
+	}
+	
+	public void trapRCallIntError(int errno, int val) {
+		trapRCallError(errno);
+		setIntVal(val);
+	}
+	
 	public boolean getErrSuccess() {
 		return isErrSuccess;
 	}
