@@ -1,0 +1,10 @@
+do (
+gdefun (var mygvar) do (
+  p 10 20;
+);
+defun (p x y)(var a b c) do (
+  println "p: x =" x "; y =" y;
+  println "parm count =" 2;
+  println "var count =" 5;
+);
+)
