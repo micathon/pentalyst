@@ -90,6 +90,10 @@ public class GeneralCommonTest implements RunConst {
 		}
 	}
 	
+	public void handleStmtVal(String fileName, int errno, int ival) {
+		handleStmtValues(fileName, errno, ival, zdval);
+	}
+	
 	private boolean isFloatEqual(double x, double y) {
 		boolean isEq;
 		isEq = Math.abs(x - y) < 0.000001;
