@@ -157,4 +157,8 @@ public class RunUTime implements IConst, RunConst {
 		return isSwitch;
 	}
 
+	public void z0500(int errno, int ival) {
+		cfg.trapRCallIntError(errno, ival);
+	}
+	
 }

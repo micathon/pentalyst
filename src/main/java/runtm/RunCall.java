@@ -288,6 +288,7 @@ public class RunCall implements IConst, RunConst {
 		) { 
 			return STKOVERFLOW;
 		}
+		ut.z0500(200, (parmCount * 100) + varCount);
 		omsg("Zcall: btm, firstp = " + firstp);
 		return firstp;
 	}
