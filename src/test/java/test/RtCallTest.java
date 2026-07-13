@@ -23,4 +23,22 @@ public class RtCallTest {
 		doParmCall(200, 205);
 	}
 	
+	private void doFunRtnVal(int errno, int ival) {
+		handleStmtVal("doFunRtnVal", errno, ival);
+	}
+	
+	@Test
+	public void doFunRtnVal220() {
+		doFunRtnVal(220, 7);
+	}
+	
+	private void doGlbCallLen(int errno, int ival) {
+		handleStmtVal("doGlbCallLen", errno, ival);
+	}
+	
+	@Test
+	public void doGlbCallLen300() {
+		doGlbCallLen(300, 3);
+	}
+	
 }
