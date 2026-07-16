@@ -10,6 +10,8 @@ import page.Page;
 import page.Store;
 
 public class RunCall implements IConst, RunConst {
+	
+	// scroll down to view stack behavior of fun call/return...
 
 	private Store store;
 	private RunTime rt;
@@ -40,6 +42,98 @@ public class RunCall implements IConst, RunConst {
 		System.out.println(msg);
 	}
 
+	/*
+	Stack behavior of fun call/rtn, ZProc/ZCall:
+	
+	OP: push operator stack
+	VAL: push value stack
+	--OP: pop operator stack
+	--VAL: pop value stack
+	SPR: fetch spare (temp stk idx) "push"
+	--SPR: pop spare
+	
+	Notes:
+	- currZstmt = rightp in main stmt loop
+	- varCount = no. of parms + loc vars
+	- currLocBase = old locBaseIdx (base stk ptr)
+	- locDepth = old locDepth (0 for proc call)
+	- currZexpr = rightp in main expr loop
+	- rp = rightp of zparen node
+	
+	ZProc: no rtn val
+	=================
+	pushStmt: nil
+	pushZcallStmt:
+	OP: ZCALL
+	VAL: ZPROC, currZstmt
+
+	arg*:
+	VAL: fun idx, arg value(s)
+	handleExprToken (rightp = 0):
+	--OP: ZCALL
+	handleStmtKwd: nil
+	runZcallStmt:
+	OP: DO, DO
+	--SPR: arg value(s), fun idx, currZstmt, ZPROC
+	SPR: ZPROC, currZstmt, fun idx
+	loc*:
+	VAL: loc var(s)
+	SPR: parm(s)
+	VAL: varCount, currLocBase, currZstmt, locDepth, ZNULL
+	<--- execute function body --->
+
+	pushStmt:
+	VAL: ZSTMT, currZstmt
+	pushRtnStmt:
+	OP: RETURN
+	handleExprToken (rightp = 0):
+	--OP: RETURN
+	runRtnStmt:
+	--OP: ... DO, DO
+	--VAL: currZstmt, ZSTMT, ZNULL
+	--VAL: locDepth, currZstmt, currLocBase, varCount
+	--VAL: loc var(s), parm(s), fun idx, currZstmt, ZPROC
+	
+	ZCall: returns a value
+	======================
+	pushExprOrLeaf: nil
+	pushExpr:
+	VAL: rp
+	--VAL: rp
+	OP: ZCALL
+	VAL: ZCALL, currZexpr
+	
+	arg*:
+	VAL: fun idx, arg value(s)
+	handleExprToken (rightp = 0):
+	--OP: ZCALL
+	handleStmtKwd: nil
+	runZcallStmt:
+	OP: DO, DO
+	--SPR: arg value(s), fun idx, currZexpr, ZCALL
+	SPR: ZCALL, currZexpr, fun idx
+	loc*:
+	VAL: loc var(s)
+	SPR: parm(s)
+	VAL: varCount, currLocBase, currZexpr, locDepth, ZNULL
+	<--- execute function body --->
+
+	pushStmt:
+	VAL: ZSTMT, currZstmt
+	pushRtnStmt:
+	OP: RETURN
+	handleExprToken:
+	VAL: rtn val
+	--OP: RETURN
+	runRtnStmt:
+	--OP: ... DO, DO
+	--VAL: rtn val
+	--VAL: currZstmt, ZSTMT, ZNULL
+	--VAL: locDepth, currZexpr, currLocBase, varCount
+	--VAL: loc var(s), parm(s), fun idx, currZexpr, ZCALL
+	VAL: rtn val
+	*/
+	
 	private int runAltZcallStmt(int parmCount, int lbidx) {
 		AddrNode addrNode;
 		PageTyp pgtyp;
