@@ -50,7 +50,7 @@ public class RunCall implements IConst, RunConst {
 	--OP: pop operator stack
 	--VAL: pop value stack
 	SPR: fetch spare (temp stk idx) "push"
-	--SPR: pop spare
+	--SPR: unfetch spare "pop"
 	
 	Notes:
 	- currZstmt = rightp in main stmt loop

@@ -20,9 +20,11 @@ import java.util.ArrayList;
 
 public class RunTime implements IConst, RunConst {
 
+	// scroll down to handleDoBlock (main loop):
+	// - stack behavior of: set z (div x y);
+	
 	private Store store;
 	private ScanSrc scanSrc;
-	private SynChk synChk;
 	private RunScanner rscan;
 	private RunCall rcall;
 	private RunFlowCtrl rfc;
@@ -374,6 +376,51 @@ public class RunTime implements IConst, RunConst {
 		default: return "Error code = " + (-rightp);
 		}
 	}
+
+	/*
+	Stack behavior of:
+	set z (div x y);
+	
+	OP: push operator stack
+	VAL: push value stack
+	--OP: pop operator stack
+	--VAL: pop value stack
+	
+	Notes:
+	- currZstmt = rightp in main stmt loop
+	- quote: push address, not value (more or less)
+	- currZexpr = rightp of zparen node of (div x y) = 0
+	- rp = rightp of currZstmt node
+
+	loop:
+		pushStmt:
+		VAL: ZSTMT, currZstmt
+		pushSetStmt:
+		OP: SET
+		VAL: z (quote)
+		pushExprOrLeaf: nil
+		pushExpr:
+		VAL: currZexpr
+		OP: DIV
+		VAL: x, y
+		--OP: DIV
+		runDivExpr:
+		--VAL: y x
+		VAL: quotient
+		swapNodes:
+		--VAL: quotient, currZexpr
+		VAL: quotient, currZexpr
+		--VAL: currZexpr = 0
+		--OP: SET
+		handleStmtKwd: nil
+		runSetStmt:
+		--VAL: quotient, z
+		(perform asst. op)
+		handleStmtKwd: (middle)
+		--VAL: currZstmt, ZSTMT
+		assume rp > 0
+		currZstmt <- rp (in main stmt loop)
+	*/
 	
 	private int handleDoBlock(Node node) {	
 		// currently only called once, in body of gdefun stmt.
