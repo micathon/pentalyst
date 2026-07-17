@@ -25,6 +25,7 @@ public class RunTime implements IConst, RunConst {
 	
 	private Store store;
 	private ScanSrc scanSrc;
+	private SynChk synChk;
 	private RunScanner rscan;
 	private RunCall rcall;
 	private RunFlowCtrl rfc;

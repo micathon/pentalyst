@@ -11,6 +11,9 @@ import page.Store;
 
 public class RunFlowCtrl implements IConst, RunConst {
 
+	// scroll down to pushIfStmt:
+	// - stack behavior of IF stmt
+	
 	private Store store;
 	private RunTime rt;
 	private RunOperators runop;
@@ -750,6 +753,74 @@ public class RunFlowCtrl implements IConst, RunConst {
 		ut.z0211(250, rightp);
 		return rightp;
 	}
+	
+	/*
+	Stack behavior of:
+	set flag true;
+	if flag do (println "if clause") else do (println "else clause");
+	
+	OP: push operator stack
+	VAL: push value stack
+	--OP: pop operator stack
+	--VAL: pop value stack
+	
+	Notes:
+	- currZstmt = rightp in main stmt loop
+	- rp = rightp of currZstmt node
+
+	IF CLAUSE: flag = T
+	===================
+	pushStmt:
+	VAL: ZSTMT, currZstmt
+	pushIfStmt:
+	OP: IF
+	pushExprOrLeaf:
+	VAL: true
+	handleDoToken:
+	--VAL: true
+	VAL: zstmt of DO block
+	OP: DO
+	--OP: DO
+	runDoStmt:
+	--VAL: zstmt of DO block
+	pushStmt:
+	<--- execute IF clause --->
+	handleBtmZeroAddr:
+	(isBranchKwd returns true)
+	--OP: IF
+	--VAL: currZstmt, ZSTMT
+	currZstmt <- rp
+	<--- end of if stmt --->
+	
+	ELSE CLAUSE: flag = F
+	=====================
+	pushStmt:
+	VAL: ZSTMT, currZstmt
+	pushIfStmt:
+	OP: IF
+	pushExprOrLeaf:
+	VAL: false
+	handleDoToken:
+	--VAL: false
+	pushExprOrLeaf: nil
+	handleSkipKwd:
+	--OP: IF
+	OP: ELSE
+	handleDoToken:
+	VAL: zstmt of DO block
+	OP: DO
+	--OP: DO
+	runDoStmt:
+	--VAL: zstmt of DO block
+	pushStmt:
+	<--- execute ELSE clause --->
+	handleBtmZeroAddr:
+	(isBranchKwd returns true)
+	--OP: ELSE
+	--VAL: currZstmt, ZSTMT
+	currZstmt <- rp
+	<--- end of if stmt --->
+	*/
 	
 	public int doBtmUntilLoop() {
 		int rightp;
