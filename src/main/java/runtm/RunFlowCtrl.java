@@ -12,7 +12,7 @@ import page.Store;
 public class RunFlowCtrl implements IConst, RunConst {
 
 	// scroll down to pushIfStmt:
-	// - stack behavior of IF stmt
+	// - stack behavior of IF and WHILE statements
 	
 	private Store store;
 	private RunTime rt;
@@ -448,16 +448,6 @@ public class RunFlowCtrl implements IConst, RunConst {
 		return 0;
 	}
 
-	public int runDoStmt() {
-		int rightp;
-		omsg("runDoStmt: top");
-		if (rt.getWhileUntil()) {
-			omsg("runDoStmt: isWhileUntil");
-		}
-		rightp = popVal(); 
-		return rightp;
-	}
-	
 	public boolean isJumpKwd(KeywordTyp kwtyp) {
 		switch (kwtyp) {
 		case ZCALL:
@@ -484,6 +474,16 @@ public class RunFlowCtrl implements IConst, RunConst {
 		default:
 			return false;
 		}
+	}
+
+	public int runDoStmt() {
+		int rightp;
+		omsg("runDoStmt: top");
+		if (rt.getWhileUntil()) {
+			omsg("runDoStmt: isWhileUntil");
+		}
+		rightp = popVal(); 
+		return rightp;
 	}
 
 	public boolean isQuestKwd(KeywordTyp kwtyp) {
@@ -755,6 +755,8 @@ public class RunFlowCtrl implements IConst, RunConst {
 	}
 	
 	/*
+	=== IF statement ================================================
+	
 	Stack behavior of:
 	set flag true;
 	if flag do (println "if clause") else do (println "else clause");
@@ -820,6 +822,135 @@ public class RunFlowCtrl implements IConst, RunConst {
 	--VAL: currZstmt, ZSTMT
 	currZstmt <- rp
 	<--- end of if stmt --->
+
+	=== WHILE statement ================================================
+
+	Stack behavior of:
+	set i 0;
+	while (< i 2) do (++ i);
+	
+	loop 2X:
+		pushStmt:
+		VAL: ZSTMT, currZstmt
+		pushWhileStmt:
+		OP: WHILE
+		VAL: currZstmt
+		pushExprOrLeaf: nil
+		pushExpr:
+		VAL: do
+		OP: LT
+		VAL: i, 2
+		--OP: LT
+		--VAL: 2, i
+		VAL: 1
+		--VAL: 1, do
+		VAL: 1, do
+		--VAL: do
+		handleDoToken:
+		--VAL: 1
+		VAL: ++ stmt
+		<--- execute loop body --->
+		handleBtmZeroAddr:
+		--OP: WHILE
+		--VAL: currZstmt, currZstmt, ZSTMT
+	loop:
+		pushStmt:
+		VAL: ZSTMT, currZstmt
+		pushWhileStmt:
+		OP: WHILE
+		VAL: currZstmt
+		pushExprOrLeaf: nil
+		pushExpr:
+		VAL: do
+		OP: LT
+		VAL: i, 2
+		--OP: LT
+		--VAL: 2, i
+		VAL: 0
+		--VAL: 0, do
+		VAL: 0, do
+		--VAL: do
+		handleDoToken:
+		--VAL: 0
+		--VAL: currZstmt
+		--OP: WHILE
+		--VAL: currZstmt, ZSTMT
+	
+	Stack behavior of:
+	set firstIter true;
+	while true do (
+	  if (not firstIter) do (break);
+	  set firstIter false;
+	);
+	
+	pushStmt:
+	VAL: ZSTMT, currZstmt
+	pushWhileStmt:
+	OP: WHILE
+	VAL: currZstmt
+	pushExprOrLeaf: nil
+	handleLeafToken:
+	VAL: true
+	handleDoToken:
+	--VAL: 1
+	VAL: if stmt
+	OP: DO
+	runDoStmt:
+	--VAL: if stmt
+	<--- execute loop body --->
+	pushStmt:
+	VAL: ZSTMT, currZstmt
+	pushIfStmt:
+	OP: IF
+	pushExprOrLeaf:
+	VAL: false
+	handleDoToken:
+	--VAL: 0
+	--OP: IF
+	--VAL: currZstmt, ZSTMT
+	<--- execute set stmt --->
+	handleBtmZeroAddr:
+	--OP: WHILE
+	--VAL: currZstmt, currZstmt, ZSTMT
+	<--- 2nd iteration --->
+	pushStmt:
+	VAL: ZSTMT, currZstmt
+	pushWhileStmt:
+	OP: WHILE
+	VAL: currZstmt
+	pushExprOrLeaf: nil
+	handleLeafToken:
+	VAL: true
+	handleDoToken:
+	--VAL: 1
+	VAL: if stmt
+	OP: DO
+	runDoStmt:
+	--VAL: if stmt
+	<--- execute loop body --->
+	pushStmt:
+	VAL: ZSTMT, currZstmt
+	pushIfStmt:
+	OP: IF
+	pushExprOrLeaf:
+	VAL: true
+	handleDoToken:
+	--VAL: 1
+	VAL: brk stmt
+	OP: DO
+	runDoStmt:
+	--VAL: brk stmt
+	pushStmt:
+	VAL: ZSTMT, currZstmt
+	pushBrkStmt:
+	OP: BREAK
+	--OP: BREAK
+	runBrkStmt:
+	--OP: DO, IF
+	--VAL: currZstmt, ZSTMT
+	--OP: DO, WHILE
+	--VAL: currZstmt, ZSTMT, currZstmt
+	--VAL: currZstmt, ZSTMT
 	*/
 	
 	public int doBtmUntilLoop() {
