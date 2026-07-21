@@ -24,8 +24,8 @@ public class RtMainTest {
 	}
 
 	@Test
-	public void doPushExpr200() {
-		doPushExpr(200);
+	public void doPushExpr199() {
+		doPushExpr(199); // ends with 9: don't set the modno automatically
 	}
 	
 	private void doPushStmt(int errno) {

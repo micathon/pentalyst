@@ -120,7 +120,7 @@ public class GeneralCommonTest implements RunConst {
 	public void doPushStmt(String fileName, int errno) {
 		boolean runOK;
 
-		cfg.setUtErr(true);
+		//cfg.setUtErr(true);
 		if(!doRunTest(fileName, errno, true)) {
 			return;
 		}
