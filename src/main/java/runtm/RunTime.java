@@ -1108,7 +1108,7 @@ public class RunTime implements IConst, RunConst {
 			return BADOP;
 		}
 		rightp = node.getRightp();
-		ut.z0200(200, kwtyp, rightp);
+		ut.z0200(199, kwtyp, rightp);
 		return rightp;
 	}
 	

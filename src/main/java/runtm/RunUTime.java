@@ -31,9 +31,10 @@ public class RunUTime implements IConst, RunConst {
 	public void z0200(int errno, KeywordTyp kwtyp, int rtnval) {
 		Node node;
 		
-		if (!cfg.isRMainMod() || (errno != cfg.getSrcErrNo())) {
+		if (!cfg.isModNoSuppressed(errno)) { 
 			return;
 		}
+		cfg.trapRMainError(errno);
 		switch (kwtyp) {
 		case ADD:
 		case MPY:
