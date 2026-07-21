@@ -285,8 +285,16 @@ public class Config implements IConst, RunConst {
 	}
 	
 	public void setModSrcErr(int modno, int errno) {
-		this.modno = modno;
+		if (!isModNoSuppressed(errno)) {
+			this.modno = modno;
+		}
 		srcerrno = errno;
+	}
+	
+	public boolean isModNoSuppressed(int errno) {
+		boolean suppressModNo;
+		suppressModNo = (errno > 0) && ((errno % 10) == 9);
+		return suppressModNo;
 	}
 	
 	public void trapSrcError(int errno) {
@@ -379,6 +387,10 @@ public class Config implements IConst, RunConst {
 	
 	public boolean isRMainMod() {
 		return (modno == 12);
+	}
+	
+	public boolean isROperMod() {
+		return (modno == 13);
 	}
 	
 	public void setElseSwitch(boolean flag) {
