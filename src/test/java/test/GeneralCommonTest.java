@@ -120,7 +120,6 @@ public class GeneralCommonTest implements RunConst {
 	public void doPushStmt(String fileName, int errno) {
 		boolean runOK;
 
-		//cfg.setUtErr(true);
 		if(!doRunTest(fileName, errno, true)) {
 			return;
 		}
@@ -128,12 +127,6 @@ public class GeneralCommonTest implements RunConst {
 		assertTrue(runOK);
 	}
 
-	/*
-	oprn("doPushExpr: success = " + cfg.getRunSuccess());
-	oprn("doPushExpr: isUtErr = " + cfg.getUtErr());
-	oprn("doPushExpr: kwdcount = " + cfg.getKwdCount());
-	*/
-	
 	public double getZdval() {
 		return zdval;
 	}
