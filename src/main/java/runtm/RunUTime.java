@@ -88,9 +88,9 @@ public class RunUTime implements IConst, RunConst {
 			return;
 		}
 		if (!chkNode(node)) {
+			cfg.setUtErr(true);
 			return;
 		}
-		cfg.setUtErr(false);
 	}
 
 	public void z0211(int errno, int rightp) {
